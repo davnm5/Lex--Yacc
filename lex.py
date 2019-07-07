@@ -4,11 +4,11 @@ import numpy as np
 
 linea=0
 tokens = (
-    'NUMPY',
+    'NUMPY','ARANGE',
     'NAME','NUMBER',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
     'LPAREN','RPAREN','POTENCY','DIVIDE_INT','STR','LIST', 'ARRAY', 'RESHAPE', 'SUM' , 'MEAN','POINT','PRINT','IF','ELSE','MENORQUE',
-    'TAB','DOSPUNTOS','MAYORQUE','DIFERENTE','DIGUAL','LINE','OR','AND'
+    'TAB','DOSPUNTOS','MAYORQUE','DIFERENTE','DIGUAL','LINE','OR','AND','COMA'
     )
 
 # Tokens
@@ -26,10 +26,11 @@ t_DIVIDE_INT = r'\/{2}'
 t_MENORQUE = r'\<'
 t_MAYORQUE= r'\>'
 t_TAB= r'[ \t]'
+t_COMA=r'\,'
 
 
 def t_DOSPUNTOS(t):
-    r':'
+    r'\:'
     t.value = t.value
     return t
 
@@ -59,7 +60,7 @@ def t_IF(t):
     return t
 
 def t_ELSE(t):
-    r'else:'
+    r'else'
     t.value = t.value
     return t
     
@@ -70,6 +71,11 @@ def t_MEAN(t) :
 
 def t_SUM(t) :
     r'sum'
+    t.value = t.value
+    return t
+
+def t_ARANGE(t):
+    r'arange'
     t.value = t.value
     return t
 
@@ -135,10 +141,7 @@ names = { }
 
 def p_statement_expr(p):
     '''statement : expression
-                 | expresasign
-                 | if
-                 | print
-                 | else '''
+                 | expresasign '''
 
 
     aux=str(p[1])
@@ -146,9 +149,20 @@ def p_statement_expr(p):
 
 
 def p_print(p):
-    '''print : TAB PRINT LPAREN expression RPAREN
+    '''statement : TAB PRINT LPAREN STR COMA expression RPAREN
+            | PRINT LPAREN STR COMA expression RPAREN
             | PRINT LPAREN expression RPAREN
-            | ELSE print'''
+            | TAB PRINT LPAREN expression RPAREN  '''
+    
+
+def p_print_error(p):
+    ''' statement : PRINT
+             | PRINT expression
+             | PRINT LPAREN expression
+             | PRINT LPAREN
+             | PRINT TAB expression''' 
+    
+    print("ERROR: Sintaxis incorrecta en PRINT ")
 
 
 def p_statement_assign(p):
@@ -177,7 +191,7 @@ def p_expression_binop(p):
 
 
 def p_condition(p):
-    ''' condition    : expression DIGUAL expression
+    ''' condition : expression DIGUAL expression
     | expression DIFERENTE expression
     | expression MAYORQUE expression
     | expression MENORQUE expression
@@ -185,44 +199,64 @@ def p_condition(p):
     | condition TAB OR TAB condition '''
 
 def p_if(p):
-    ''' if    : IF LPAREN expression MENORQUE expression RPAREN DOSPUNTOS
-    | IF LPAREN expression DIFERENTE expression RPAREN DOSPUNTOS
-    | IF LPAREN expression DIGUAL expression RPAREN DOSPUNTOS
-    | IF LPAREN expression MAYORQUE expression RPAREN DOSPUNTOS
-    | IF LPAREN condition RPAREN DOSPUNTOS
+    ''' statement : IF LPAREN condition RPAREN DOSPUNTOS
     '''
+
+def p_if_error(p):
+    ''' statement : IF LPAREN condition RPAREN
+    | IF TAB condition DOSPUNTOS
+    | IF LPAREN condition
+    | IF LPAREN 
+    | IF LPAREN expression
+    | IF LPAREN condition DOSPUNTOS '''
     
+    print("ERROR: Sintaxis incorrecta en la sentencia IF ")
+
+    
+
 def p_else(p):
-    ''' else : ELSE
-    | ELSE TAB '''
+    ''' statement : ELSE DOSPUNTOS '''
+
+def p_else_error(p):
+    ''' 
+    statement : ELSE
+    
+    '''
+    print("ERROR: Sintaxis incorrecta en la sentencia ELSE ")
+
 
 def p_expresion_numpy(p):
     'exprenumpy : NUMPY POINT numpyfunc'
-    p[0] = p[1]+ str(p[2])+p[3]
+    if(p[3]!=None): p[0] = p[1]+ str(p[2])+p[3]
 
 
 def p_numpyfuncion(p):
     '''numpyfunc : ARRAY numpyarg
                  | SUM numpyarg
                  | RESHAPE numpyarg
-                 | MEAN numpyarg'''
-
-    p[0] = p[1]+p[2]
+                 | MEAN numpyarg
+                 | ARANGE numpyarg
+                 | ARANGE numpyarg_error'''
+    if(p[2]!=None): p[0] = p[1]+p[2]
 
 
 def p_numpyarg(p):
-    '''numpyarg : LPAREN NAME RPAREN'''
-
-    p[0]= "(" + p[2] +")"
+    ''' numpyarg : LPAREN NUMBER RPAREN
+                | LPAREN NAME RPAREN
+    '''
+    p[0]= "(" + str(p[2]) +")"
     print(p[0])
+    
+def p_numpyarg_error(p):
+    ''' numpyarg_error : LPAREN STR RPAREN
+                        | LPAREN LIST RPAREN
+                        | LPAREN RPAREN   '''
+    print("NO SABES PROGRAMAR")
 
 def p_expression_uminus(p):
     'expression : MINUS expression %prec UMINUS'
     p[0] = -p[2]
 
-def p_expression_group(p):
-    'expression : LPAREN expression RPAREN'
-    p[0] = p[2]
 
 def p_expression_number(p):
     'expression : NUMBER'
@@ -236,6 +270,9 @@ def p_expresion_list(p):
     'expression : LIST'
     p[0]=p[1]
 
+def p_expression_group(p):
+    'expression : LPAREN expression RPAREN'
+    p[0] = p[2]
 
 def p_expression_name(p):
     'expression : NAME'
