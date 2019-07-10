@@ -1,14 +1,13 @@
 import re
 import numpy as np
 
-
 linea=0
 tokens = (
-    'NUMPY','ARANGE',
+    'NUMPY','ARANGE','ARGMAX',
     'NAME','NUMBER',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
     'LPAREN','RPAREN','POTENCY','DIVIDE_INT','STR','LIST', 'ARRAY', 'RESHAPE', 'SUM' , 'MEAN','POINT','PRINT','IF','ELSE','MENORQUE',
-    'TAB','DOSPUNTOS','MAYORQUE','DIFERENTE','DIGUAL','LINE','OR','AND','COMA'
+    'TAB','DOSPUNTOS','MAYORQUE','DIFERENTE','DIGUAL','LINE','OR','AND','COMA','LCORCHETE','RCORCHETE'
     )
 
 # Tokens
@@ -27,6 +26,8 @@ t_MENORQUE = r'\<'
 t_MAYORQUE= r'\>'
 t_TAB= r'[ \t]'
 t_COMA=r'\,'
+t_LCORCHETE  = r'\['
+t_RCORCHETE  = r'\]'
 
 
 def t_DOSPUNTOS(t):
@@ -95,13 +96,8 @@ def t_NUMBER(t):
     return t
 
 def t_STR(t):
-    r'(\'(\s*\w*\S*)+\')|(\"(\s*\w*\S*)+\")'
+    r'(\'(\s*\w*\S*)*\')|(\"(\s*\w*\S*)*\")'
     t.value =t.value
-    return t
-
-def t_LIST(t):
-    r'(\[((\d+|\"\S*\W*\S*\")(\,(\d+|\"\S*\W*\S*\"))*)*\])'
-    t.value=t.value
     return t
 
 def t_DIFERENTE(t):
@@ -113,7 +109,11 @@ def t_DIGUAL(t):
     r'=='
     t.value=t.value
     return t
-    
+
+def t_ARGMAX(t):
+    r'argmax'
+    t.value = t.value
+    return t
     
 
 def t_error(t):
@@ -141,7 +141,8 @@ names = { }
 
 def p_statement_expr(p):
     '''statement : expression
-                 | expresasign '''
+                 | expresasign
+                 | expression_numpy '''
 
 
     aux=str(p[1])
@@ -167,7 +168,7 @@ def p_print_error(p):
 
 def p_statement_assign(p):
     '''expresasign : NAME EQUALS expression
-                   | NAME EQUALS exprenumpy'''
+                   | NAME EQUALS expression_numpy '''
     names[p[1]] = p[3]
 
 def p_expression_binop(p):
@@ -226,33 +227,79 @@ def p_else_error(p):
 
 
 def p_expresion_numpy(p):
-    'exprenumpy : NUMPY POINT numpyfunc'
+    'expression_numpy : NUMPY POINT numpyfunc'
     if(p[3]!=None): p[0] = p[1]+ str(p[2])+p[3]
 
 
 def p_numpyfuncion(p):
-    '''numpyfunc : ARRAY numpyarg
-                 | SUM numpyarg
-                 | RESHAPE numpyarg
-                 | MEAN numpyarg
-                 | ARANGE numpyarg
-                 | ARANGE numpyarg_error'''
-    if(p[2]!=None): p[0] = p[1]+p[2]
-
-
-def p_numpyarg(p):
-    ''' numpyarg : LPAREN NUMBER RPAREN
-                | LPAREN NAME RPAREN
-    '''
-    p[0]= "(" + str(p[2]) +")"
-    print(p[0])
+    '''numpyfunc : ARRAY array
+                 | ARANGE arange
+                 | ARANGE arange_error
+                 | ARRAY array_error
+                 | ARGMAX argmax
+                 | ARGMAX argmax_error '''
+    p[0] = p[1]+str(p[2])
     
-def p_numpyarg_error(p):
-    ''' numpyarg_error : LPAREN STR RPAREN
-                        | LPAREN LIST RPAREN
-                        | LPAREN RPAREN   '''
-    print("NO SABES PROGRAMAR")
 
+def p_array(p):
+    ''' array : LPAREN NAME RPAREN
+                 | LPAREN NUMBER RPAREN
+                 | LPAREN expression RPAREN
+    '''
+    try:
+        p[0]=str(p[1])+str(p[2])+str(p[3])
+        if(not names[p[2]].startswith("[") and not names[p[2]].endswith("]")):
+            print("ERROR: La variable no contiene una lista")
+        else:
+            p[0]=p[2]
+            
+        
+    except:
+        print("")
+    
+def p_array_error(p):
+    '''
+    array_error : LPAREN STR RPAREN
+    '''    
+    print("ERROR: El argumento de array debe ser una lista")
+
+def p_arange(p):
+    ''' arange : LPAREN NUMBER RPAREN
+                | LPAREN NAME RPAREN '''
+    
+    try:
+        p[0]=str(p[1])+str(p[2])+str(p[3])
+        if(not str(names[p[2]]).isdigit()):
+            print("ERROR: La variable no contiene un digito")
+        else:
+            p[0]=p[2]
+             
+    except: 
+        print("")
+   
+    
+def p_arange_error(p):
+    ''' arange_error : LPAREN STR RPAREN '''
+    print("Error: El argumento de arange debe ser un numero")
+    
+def p_argmax(p):
+    ''' argmax : LPAREN NAME RPAREN
+                | LPAREN expression RPAREN '''
+    try:
+        p[0]=str(p[1])+str(p[2])+str(p[3])
+        if(not names[p[2]].startswith("[") and not names[p[2]].endswith("]")):
+            print("ERROR: La variable no contiene una lista")
+        else:
+            p[0]=p[2]
+    except:
+        print("")
+
+def p_argmax_error(p):
+    '''
+    argmax_error : LPAREN STR RPAREN
+    '''    
+    print("ERROR: El argumento de argmax debe ser una lista")
+    
 def p_expression_uminus(p):
     'expression : MINUS expression %prec UMINUS'
     p[0] = -p[2]
@@ -260,16 +307,37 @@ def p_expression_uminus(p):
 
 def p_expression_number(p):
     'expression : NUMBER'
-    p[0] = p[1]
+    p[0] =int(p[1])
 
 def p_expresion_str(p):
     'expression : STR'
     p[0]= str(p[1])
 
-def p_expresion_list(p):
-    'expression : LIST'
-    p[0]=p[1]
+def p_expression_lst(p):
+    ''' expression : LCORCHETE expression_list RCORCHETE 
+                    | LCORCHETE RCORCHETE
+                    | list_error '''
+    try:
+        p[0]=str(p[1])+str(p[2])+str(p[3])
+    except:
+        print("")
 
+def p_expression_lst_error(p):
+    ''' list_error : LCORCHETE expression_list
+                   | LCORCHETE expression_list COMA '''
+    print("Error: Falta el caracter ']' en la lista ")
+
+
+def p_expresion_list(p):
+    ''' expression_list :  expression COMA expression_list
+                        | expression '''
+    
+    try:
+        p[0]=str(p[1])+str(p[2])+str(p[3])
+    except:
+        p[0]=str(p[1])
+    
+   
 def p_expression_group(p):
     'expression : LPAREN expression RPAREN'
     p[0] = p[2]
@@ -300,8 +368,6 @@ def validar (data):
             print(list_temp)   
                 
             result=parser.parse(data)
-            if(result!=None):
-                print(result)
-            
+
         except EOFError:
             print("error lexer")

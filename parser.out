@@ -3,109 +3,134 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     LINE
+    LIST
+    MEAN
+    RESHAPE
+    SUM
 
 Grammar
 
 Rule 0     S' -> statement
 Rule 1     statement -> expression
 Rule 2     statement -> expresasign
-Rule 3     statement -> TAB PRINT LPAREN STR COMA expression RPAREN
-Rule 4     statement -> PRINT LPAREN STR COMA expression RPAREN
-Rule 5     statement -> PRINT LPAREN expression RPAREN
-Rule 6     statement -> TAB PRINT LPAREN expression RPAREN
-Rule 7     statement -> PRINT
-Rule 8     statement -> PRINT expression
-Rule 9     statement -> PRINT LPAREN expression
-Rule 10    statement -> PRINT LPAREN
-Rule 11    statement -> PRINT TAB expression
-Rule 12    expresasign -> NAME EQUALS expression
-Rule 13    expresasign -> NAME EQUALS exprenumpy
-Rule 14    expression -> expression PLUS expression
-Rule 15    expression -> expression MINUS expression
-Rule 16    expression -> expression TIMES expression
-Rule 17    expression -> expression DIVIDE expression
-Rule 18    expression -> expression POTENCY expression
-Rule 19    expression -> expression DIVIDE_INT expression
-Rule 20    condition -> expression DIGUAL expression
-Rule 21    condition -> expression DIFERENTE expression
-Rule 22    condition -> expression MAYORQUE expression
-Rule 23    condition -> expression MENORQUE expression
-Rule 24    condition -> condition TAB AND TAB condition
-Rule 25    condition -> condition TAB OR TAB condition
-Rule 26    statement -> IF LPAREN condition RPAREN DOSPUNTOS
-Rule 27    statement -> IF LPAREN condition RPAREN
-Rule 28    statement -> IF TAB condition DOSPUNTOS
-Rule 29    statement -> IF LPAREN condition
-Rule 30    statement -> IF LPAREN
-Rule 31    statement -> IF LPAREN expression
-Rule 32    statement -> IF LPAREN condition DOSPUNTOS
-Rule 33    statement -> ELSE DOSPUNTOS
-Rule 34    statement -> ELSE
-Rule 35    exprenumpy -> NUMPY POINT numpyfunc
-Rule 36    numpyfunc -> ARRAY numpyarg
-Rule 37    numpyfunc -> SUM numpyarg
-Rule 38    numpyfunc -> RESHAPE numpyarg
-Rule 39    numpyfunc -> MEAN numpyarg
-Rule 40    numpyfunc -> ARANGE numpyarg
-Rule 41    numpyfunc -> ARANGE numpyarg_error
-Rule 42    numpyarg -> LPAREN NUMBER RPAREN
-Rule 43    numpyarg -> LPAREN NAME RPAREN
-Rule 44    numpyarg_error -> LPAREN STR RPAREN
-Rule 45    numpyarg_error -> LPAREN LIST RPAREN
-Rule 46    numpyarg_error -> LPAREN RPAREN
-Rule 47    expression -> MINUS expression
-Rule 48    expression -> NUMBER
-Rule 49    expression -> STR
-Rule 50    expression -> LIST
-Rule 51    expression -> LPAREN expression RPAREN
-Rule 52    expression -> NAME
+Rule 3     statement -> expression_numpy
+Rule 4     statement -> TAB PRINT LPAREN STR COMA expression RPAREN
+Rule 5     statement -> PRINT LPAREN STR COMA expression RPAREN
+Rule 6     statement -> PRINT LPAREN expression RPAREN
+Rule 7     statement -> TAB PRINT LPAREN expression RPAREN
+Rule 8     statement -> PRINT
+Rule 9     statement -> PRINT expression
+Rule 10    statement -> PRINT LPAREN expression
+Rule 11    statement -> PRINT LPAREN
+Rule 12    statement -> PRINT TAB expression
+Rule 13    expresasign -> NAME EQUALS expression
+Rule 14    expresasign -> NAME EQUALS expression_numpy
+Rule 15    expression -> expression PLUS expression
+Rule 16    expression -> expression MINUS expression
+Rule 17    expression -> expression TIMES expression
+Rule 18    expression -> expression DIVIDE expression
+Rule 19    expression -> expression POTENCY expression
+Rule 20    expression -> expression DIVIDE_INT expression
+Rule 21    condition -> expression DIGUAL expression
+Rule 22    condition -> expression DIFERENTE expression
+Rule 23    condition -> expression MAYORQUE expression
+Rule 24    condition -> expression MENORQUE expression
+Rule 25    condition -> condition TAB AND TAB condition
+Rule 26    condition -> condition TAB OR TAB condition
+Rule 27    statement -> IF LPAREN condition RPAREN DOSPUNTOS
+Rule 28    statement -> IF LPAREN condition RPAREN
+Rule 29    statement -> IF TAB condition DOSPUNTOS
+Rule 30    statement -> IF LPAREN condition
+Rule 31    statement -> IF LPAREN
+Rule 32    statement -> IF LPAREN expression
+Rule 33    statement -> IF LPAREN condition DOSPUNTOS
+Rule 34    statement -> ELSE DOSPUNTOS
+Rule 35    statement -> ELSE
+Rule 36    expression_numpy -> NUMPY POINT numpyfunc
+Rule 37    numpyfunc -> ARRAY array
+Rule 38    numpyfunc -> ARANGE arange
+Rule 39    numpyfunc -> ARANGE arange_error
+Rule 40    numpyfunc -> ARRAY array_error
+Rule 41    numpyfunc -> ARGMAX argmax
+Rule 42    numpyfunc -> ARGMAX argmax_error
+Rule 43    array -> LPAREN NAME RPAREN
+Rule 44    array -> LPAREN NUMBER RPAREN
+Rule 45    array -> LPAREN expression RPAREN
+Rule 46    array_error -> LPAREN STR RPAREN
+Rule 47    arange -> LPAREN NUMBER RPAREN
+Rule 48    arange -> LPAREN NAME RPAREN
+Rule 49    arange_error -> LPAREN STR RPAREN
+Rule 50    argmax -> LPAREN NAME RPAREN
+Rule 51    argmax -> LPAREN expression RPAREN
+Rule 52    argmax_error -> LPAREN STR RPAREN
+Rule 53    expression -> MINUS expression
+Rule 54    expression -> NUMBER
+Rule 55    expression -> STR
+Rule 56    expression -> LCORCHETE expression_list RCORCHETE
+Rule 57    expression -> LCORCHETE RCORCHETE
+Rule 58    expression -> list_error
+Rule 59    list_error -> LCORCHETE expression_list
+Rule 60    list_error -> LCORCHETE expression_list COMA
+Rule 61    expression_list -> expression COMA expression_list
+Rule 62    expression_list -> expression
+Rule 63    expression -> LPAREN expression RPAREN
+Rule 64    expression -> NAME
 
 Terminals, with rules where they appear
 
-AND                  : 24
-ARANGE               : 40 41
-ARRAY                : 36
-COMA                 : 3 4
-DIFERENTE            : 21
-DIGUAL               : 20
-DIVIDE               : 17
-DIVIDE_INT           : 19
-DOSPUNTOS            : 26 28 32 33
-ELSE                 : 33 34
-EQUALS               : 12 13
-IF                   : 26 27 28 29 30 31 32
+AND                  : 25
+ARANGE               : 38 39
+ARGMAX               : 41 42
+ARRAY                : 37 40
+COMA                 : 4 5 60 61
+DIFERENTE            : 22
+DIGUAL               : 21
+DIVIDE               : 18
+DIVIDE_INT           : 20
+DOSPUNTOS            : 27 29 33 34
+ELSE                 : 34 35
+EQUALS               : 13 14
+IF                   : 27 28 29 30 31 32 33
+LCORCHETE            : 56 57 59 60
 LINE                 : 
-LIST                 : 45 50
-LPAREN               : 3 4 5 6 9 10 26 27 29 30 31 32 42 43 44 45 46 51
-MAYORQUE             : 22
-MEAN                 : 39
-MENORQUE             : 23
-MINUS                : 15 47
-NAME                 : 12 13 43 52
-NUMBER               : 42 48
-NUMPY                : 35
-OR                   : 25
-PLUS                 : 14
-POINT                : 35
-POTENCY              : 18
-PRINT                : 3 4 5 6 7 8 9 10 11
-RESHAPE              : 38
-RPAREN               : 3 4 5 6 26 27 42 43 44 45 46 51
-STR                  : 3 4 44 49
-SUM                  : 37
-TAB                  : 3 6 11 24 24 25 25 28
-TIMES                : 16
+LIST                 : 
+LPAREN               : 4 5 6 7 10 11 27 28 30 31 32 33 43 44 45 46 47 48 49 50 51 52 63
+MAYORQUE             : 23
+MEAN                 : 
+MENORQUE             : 24
+MINUS                : 16 53
+NAME                 : 13 14 43 48 50 64
+NUMBER               : 44 47 54
+NUMPY                : 36
+OR                   : 26
+PLUS                 : 15
+POINT                : 36
+POTENCY              : 19
+PRINT                : 4 5 6 7 8 9 10 11 12
+RCORCHETE            : 56 57
+RESHAPE              : 
+RPAREN               : 4 5 6 7 27 28 43 44 45 46 47 48 49 50 51 52 63
+STR                  : 4 5 46 49 52 55
+SUM                  : 
+TAB                  : 4 7 12 25 25 26 26 29
+TIMES                : 17
 error                : 
 
 Nonterminals, with rules where they appear
 
-condition            : 24 24 25 25 26 27 28 29 32
-exprenumpy           : 13
+arange               : 38
+arange_error         : 39
+argmax               : 41
+argmax_error         : 42
+array                : 37
+array_error          : 40
+condition            : 25 25 26 26 27 28 29 30 33
 expresasign          : 2
-expression           : 1 3 4 5 6 8 9 11 12 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 31 47 51
-numpyarg             : 36 37 38 39 40
-numpyarg_error       : 41
-numpyfunc            : 35
+expression           : 1 4 5 6 7 9 10 12 13 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 32 45 51 53 61 62 63
+expression_list      : 56 59 60 61
+expression_numpy     : 3 14
+list_error           : 58
+numpyfunc            : 36
 statement            : 0
 
 Parsing method: LALR
@@ -115,53 +140,62 @@ state 0
     (0) S' -> . statement
     (1) statement -> . expression
     (2) statement -> . expresasign
-    (3) statement -> . TAB PRINT LPAREN STR COMA expression RPAREN
-    (4) statement -> . PRINT LPAREN STR COMA expression RPAREN
-    (5) statement -> . PRINT LPAREN expression RPAREN
-    (6) statement -> . TAB PRINT LPAREN expression RPAREN
-    (7) statement -> . PRINT
-    (8) statement -> . PRINT expression
-    (9) statement -> . PRINT LPAREN expression
-    (10) statement -> . PRINT LPAREN
-    (11) statement -> . PRINT TAB expression
-    (26) statement -> . IF LPAREN condition RPAREN DOSPUNTOS
-    (27) statement -> . IF LPAREN condition RPAREN
-    (28) statement -> . IF TAB condition DOSPUNTOS
-    (29) statement -> . IF LPAREN condition
-    (30) statement -> . IF LPAREN
-    (31) statement -> . IF LPAREN expression
-    (32) statement -> . IF LPAREN condition DOSPUNTOS
-    (33) statement -> . ELSE DOSPUNTOS
-    (34) statement -> . ELSE
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
-    (12) expresasign -> . NAME EQUALS expression
-    (13) expresasign -> . NAME EQUALS exprenumpy
+    (3) statement -> . expression_numpy
+    (4) statement -> . TAB PRINT LPAREN STR COMA expression RPAREN
+    (5) statement -> . PRINT LPAREN STR COMA expression RPAREN
+    (6) statement -> . PRINT LPAREN expression RPAREN
+    (7) statement -> . TAB PRINT LPAREN expression RPAREN
+    (8) statement -> . PRINT
+    (9) statement -> . PRINT expression
+    (10) statement -> . PRINT LPAREN expression
+    (11) statement -> . PRINT LPAREN
+    (12) statement -> . PRINT TAB expression
+    (27) statement -> . IF LPAREN condition RPAREN DOSPUNTOS
+    (28) statement -> . IF LPAREN condition RPAREN
+    (29) statement -> . IF TAB condition DOSPUNTOS
+    (30) statement -> . IF LPAREN condition
+    (31) statement -> . IF LPAREN
+    (32) statement -> . IF LPAREN expression
+    (33) statement -> . IF LPAREN condition DOSPUNTOS
+    (34) statement -> . ELSE DOSPUNTOS
+    (35) statement -> . ELSE
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (13) expresasign -> . NAME EQUALS expression
+    (14) expresasign -> . NAME EQUALS expression_numpy
+    (36) expression_numpy -> . NUMPY POINT numpyfunc
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    TAB             shift and go to state 4
-    PRINT           shift and go to state 5
-    IF              shift and go to state 8
-    ELSE            shift and go to state 9
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 13
+    TAB             shift and go to state 5
+    PRINT           shift and go to state 6
+    IF              shift and go to state 9
+    ELSE            shift and go to state 10
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 15
+    NUMPY           shift and go to state 16
 
     statement                      shift and go to state 1
     expression                     shift and go to state 2
     expresasign                    shift and go to state 3
+    expression_numpy               shift and go to state 4
+    list_error                     shift and go to state 14
 
 state 1
 
@@ -172,20 +206,20 @@ state 1
 state 2
 
     (1) statement -> expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
     $end            reduce using rule 1 (statement -> expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 3
@@ -197,784 +231,995 @@ state 3
 
 state 4
 
-    (3) statement -> TAB . PRINT LPAREN STR COMA expression RPAREN
-    (6) statement -> TAB . PRINT LPAREN expression RPAREN
+    (3) statement -> expression_numpy .
 
-    PRINT           shift and go to state 20
+    $end            reduce using rule 3 (statement -> expression_numpy .)
 
 
 state 5
 
-    (4) statement -> PRINT . LPAREN STR COMA expression RPAREN
-    (5) statement -> PRINT . LPAREN expression RPAREN
-    (7) statement -> PRINT .
-    (8) statement -> PRINT . expression
-    (9) statement -> PRINT . LPAREN expression
-    (10) statement -> PRINT . LPAREN
-    (11) statement -> PRINT . TAB expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (4) statement -> TAB . PRINT LPAREN STR COMA expression RPAREN
+    (7) statement -> TAB . PRINT LPAREN expression RPAREN
 
-    LPAREN          shift and go to state 21
-    $end            reduce using rule 7 (statement -> PRINT .)
-    TAB             shift and go to state 23
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    NAME            shift and go to state 24
+    PRINT           shift and go to state 23
 
-    expression                     shift and go to state 22
 
 state 6
 
-    (51) expression -> LPAREN . expression RPAREN
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (5) statement -> PRINT . LPAREN STR COMA expression RPAREN
+    (6) statement -> PRINT . LPAREN expression RPAREN
+    (8) statement -> PRINT .
+    (9) statement -> PRINT . expression
+    (10) statement -> PRINT . LPAREN expression
+    (11) statement -> PRINT . LPAREN
+    (12) statement -> PRINT . TAB expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    LPAREN          shift and go to state 24
+    $end            reduce using rule 8 (statement -> PRINT .)
+    TAB             shift and go to state 26
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    NAME            shift and go to state 27
 
     expression                     shift and go to state 25
+    list_error                     shift and go to state 14
 
 state 7
 
-    (49) expression -> STR .
+    (63) expression -> LPAREN . expression RPAREN
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    PLUS            reduce using rule 49 (expression -> STR .)
-    MINUS           reduce using rule 49 (expression -> STR .)
-    TIMES           reduce using rule 49 (expression -> STR .)
-    DIVIDE          reduce using rule 49 (expression -> STR .)
-    POTENCY         reduce using rule 49 (expression -> STR .)
-    DIVIDE_INT      reduce using rule 49 (expression -> STR .)
-    $end            reduce using rule 49 (expression -> STR .)
-    RPAREN          reduce using rule 49 (expression -> STR .)
-    DIGUAL          reduce using rule 49 (expression -> STR .)
-    DIFERENTE       reduce using rule 49 (expression -> STR .)
-    MAYORQUE        reduce using rule 49 (expression -> STR .)
-    MENORQUE        reduce using rule 49 (expression -> STR .)
-    DOSPUNTOS       reduce using rule 49 (expression -> STR .)
-    TAB             reduce using rule 49 (expression -> STR .)
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 28
+    list_error                     shift and go to state 14
 
 state 8
 
-    (26) statement -> IF . LPAREN condition RPAREN DOSPUNTOS
-    (27) statement -> IF . LPAREN condition RPAREN
-    (28) statement -> IF . TAB condition DOSPUNTOS
-    (29) statement -> IF . LPAREN condition
-    (30) statement -> IF . LPAREN
-    (31) statement -> IF . LPAREN expression
-    (32) statement -> IF . LPAREN condition DOSPUNTOS
+    (55) expression -> STR .
 
-    LPAREN          shift and go to state 26
-    TAB             shift and go to state 27
+    PLUS            reduce using rule 55 (expression -> STR .)
+    MINUS           reduce using rule 55 (expression -> STR .)
+    TIMES           reduce using rule 55 (expression -> STR .)
+    DIVIDE          reduce using rule 55 (expression -> STR .)
+    POTENCY         reduce using rule 55 (expression -> STR .)
+    DIVIDE_INT      reduce using rule 55 (expression -> STR .)
+    $end            reduce using rule 55 (expression -> STR .)
+    RPAREN          reduce using rule 55 (expression -> STR .)
+    COMA            reduce using rule 55 (expression -> STR .)
+    RCORCHETE       reduce using rule 55 (expression -> STR .)
+    DIGUAL          reduce using rule 55 (expression -> STR .)
+    DIFERENTE       reduce using rule 55 (expression -> STR .)
+    MAYORQUE        reduce using rule 55 (expression -> STR .)
+    MENORQUE        reduce using rule 55 (expression -> STR .)
+    DOSPUNTOS       reduce using rule 55 (expression -> STR .)
+    TAB             reduce using rule 55 (expression -> STR .)
 
 
 state 9
 
-    (33) statement -> ELSE . DOSPUNTOS
-    (34) statement -> ELSE .
+    (27) statement -> IF . LPAREN condition RPAREN DOSPUNTOS
+    (28) statement -> IF . LPAREN condition RPAREN
+    (29) statement -> IF . TAB condition DOSPUNTOS
+    (30) statement -> IF . LPAREN condition
+    (31) statement -> IF . LPAREN
+    (32) statement -> IF . LPAREN expression
+    (33) statement -> IF . LPAREN condition DOSPUNTOS
 
-    DOSPUNTOS       shift and go to state 28
-    $end            reduce using rule 34 (statement -> ELSE .)
+    LPAREN          shift and go to state 29
+    TAB             shift and go to state 30
 
 
 state 10
 
-    (47) expression -> MINUS . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (34) statement -> ELSE . DOSPUNTOS
+    (35) statement -> ELSE .
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    DOSPUNTOS       shift and go to state 31
+    $end            reduce using rule 35 (statement -> ELSE .)
 
-    expression                     shift and go to state 29
 
 state 11
 
-    (48) expression -> NUMBER .
+    (53) expression -> MINUS . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    PLUS            reduce using rule 48 (expression -> NUMBER .)
-    MINUS           reduce using rule 48 (expression -> NUMBER .)
-    TIMES           reduce using rule 48 (expression -> NUMBER .)
-    DIVIDE          reduce using rule 48 (expression -> NUMBER .)
-    POTENCY         reduce using rule 48 (expression -> NUMBER .)
-    DIVIDE_INT      reduce using rule 48 (expression -> NUMBER .)
-    $end            reduce using rule 48 (expression -> NUMBER .)
-    RPAREN          reduce using rule 48 (expression -> NUMBER .)
-    DIGUAL          reduce using rule 48 (expression -> NUMBER .)
-    DIFERENTE       reduce using rule 48 (expression -> NUMBER .)
-    MAYORQUE        reduce using rule 48 (expression -> NUMBER .)
-    MENORQUE        reduce using rule 48 (expression -> NUMBER .)
-    DOSPUNTOS       reduce using rule 48 (expression -> NUMBER .)
-    TAB             reduce using rule 48 (expression -> NUMBER .)
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 32
+    list_error                     shift and go to state 14
 
 state 12
 
-    (50) expression -> LIST .
+    (54) expression -> NUMBER .
 
-    PLUS            reduce using rule 50 (expression -> LIST .)
-    MINUS           reduce using rule 50 (expression -> LIST .)
-    TIMES           reduce using rule 50 (expression -> LIST .)
-    DIVIDE          reduce using rule 50 (expression -> LIST .)
-    POTENCY         reduce using rule 50 (expression -> LIST .)
-    DIVIDE_INT      reduce using rule 50 (expression -> LIST .)
-    $end            reduce using rule 50 (expression -> LIST .)
-    RPAREN          reduce using rule 50 (expression -> LIST .)
-    DIGUAL          reduce using rule 50 (expression -> LIST .)
-    DIFERENTE       reduce using rule 50 (expression -> LIST .)
-    MAYORQUE        reduce using rule 50 (expression -> LIST .)
-    MENORQUE        reduce using rule 50 (expression -> LIST .)
-    DOSPUNTOS       reduce using rule 50 (expression -> LIST .)
-    TAB             reduce using rule 50 (expression -> LIST .)
+    PLUS            reduce using rule 54 (expression -> NUMBER .)
+    MINUS           reduce using rule 54 (expression -> NUMBER .)
+    TIMES           reduce using rule 54 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 54 (expression -> NUMBER .)
+    POTENCY         reduce using rule 54 (expression -> NUMBER .)
+    DIVIDE_INT      reduce using rule 54 (expression -> NUMBER .)
+    $end            reduce using rule 54 (expression -> NUMBER .)
+    RPAREN          reduce using rule 54 (expression -> NUMBER .)
+    COMA            reduce using rule 54 (expression -> NUMBER .)
+    RCORCHETE       reduce using rule 54 (expression -> NUMBER .)
+    DIGUAL          reduce using rule 54 (expression -> NUMBER .)
+    DIFERENTE       reduce using rule 54 (expression -> NUMBER .)
+    MAYORQUE        reduce using rule 54 (expression -> NUMBER .)
+    MENORQUE        reduce using rule 54 (expression -> NUMBER .)
+    DOSPUNTOS       reduce using rule 54 (expression -> NUMBER .)
+    TAB             reduce using rule 54 (expression -> NUMBER .)
 
 
 state 13
 
-    (52) expression -> NAME .
-    (12) expresasign -> NAME . EQUALS expression
-    (13) expresasign -> NAME . EQUALS exprenumpy
+    (56) expression -> LCORCHETE . expression_list RCORCHETE
+    (57) expression -> LCORCHETE . RCORCHETE
+    (59) list_error -> LCORCHETE . expression_list
+    (60) list_error -> LCORCHETE . expression_list COMA
+    (61) expression_list -> . expression COMA expression_list
+    (62) expression_list -> . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    PLUS            reduce using rule 52 (expression -> NAME .)
-    MINUS           reduce using rule 52 (expression -> NAME .)
-    TIMES           reduce using rule 52 (expression -> NAME .)
-    DIVIDE          reduce using rule 52 (expression -> NAME .)
-    POTENCY         reduce using rule 52 (expression -> NAME .)
-    DIVIDE_INT      reduce using rule 52 (expression -> NAME .)
-    $end            reduce using rule 52 (expression -> NAME .)
-    EQUALS          shift and go to state 30
+    RCORCHETE       shift and go to state 34
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression_list                shift and go to state 33
+    expression                     shift and go to state 35
+    list_error                     shift and go to state 14
 
 state 14
 
-    (14) expression -> expression PLUS . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (58) expression -> list_error .
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    PLUS            reduce using rule 58 (expression -> list_error .)
+    MINUS           reduce using rule 58 (expression -> list_error .)
+    TIMES           reduce using rule 58 (expression -> list_error .)
+    DIVIDE          reduce using rule 58 (expression -> list_error .)
+    POTENCY         reduce using rule 58 (expression -> list_error .)
+    DIVIDE_INT      reduce using rule 58 (expression -> list_error .)
+    $end            reduce using rule 58 (expression -> list_error .)
+    RPAREN          reduce using rule 58 (expression -> list_error .)
+    COMA            reduce using rule 58 (expression -> list_error .)
+    RCORCHETE       reduce using rule 58 (expression -> list_error .)
+    DIGUAL          reduce using rule 58 (expression -> list_error .)
+    DIFERENTE       reduce using rule 58 (expression -> list_error .)
+    MAYORQUE        reduce using rule 58 (expression -> list_error .)
+    MENORQUE        reduce using rule 58 (expression -> list_error .)
+    DOSPUNTOS       reduce using rule 58 (expression -> list_error .)
+    TAB             reduce using rule 58 (expression -> list_error .)
 
-    expression                     shift and go to state 31
 
 state 15
 
-    (15) expression -> expression MINUS . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (64) expression -> NAME .
+    (13) expresasign -> NAME . EQUALS expression
+    (14) expresasign -> NAME . EQUALS expression_numpy
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    PLUS            reduce using rule 64 (expression -> NAME .)
+    MINUS           reduce using rule 64 (expression -> NAME .)
+    TIMES           reduce using rule 64 (expression -> NAME .)
+    DIVIDE          reduce using rule 64 (expression -> NAME .)
+    POTENCY         reduce using rule 64 (expression -> NAME .)
+    DIVIDE_INT      reduce using rule 64 (expression -> NAME .)
+    $end            reduce using rule 64 (expression -> NAME .)
+    EQUALS          shift and go to state 36
 
-    expression                     shift and go to state 32
 
 state 16
 
-    (16) expression -> expression TIMES . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (36) expression_numpy -> NUMPY . POINT numpyfunc
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    POINT           shift and go to state 37
 
-    expression                     shift and go to state 33
 
 state 17
 
-    (17) expression -> expression DIVIDE . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (15) expression -> expression PLUS . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
-    expression                     shift and go to state 34
+    expression                     shift and go to state 38
+    list_error                     shift and go to state 14
 
 state 18
 
-    (18) expression -> expression POTENCY . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (16) expression -> expression MINUS . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
-    expression                     shift and go to state 35
+    expression                     shift and go to state 39
+    list_error                     shift and go to state 14
 
 state 19
 
-    (19) expression -> expression DIVIDE_INT . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (17) expression -> expression TIMES . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
-    expression                     shift and go to state 36
+    expression                     shift and go to state 40
+    list_error                     shift and go to state 14
 
 state 20
 
-    (3) statement -> TAB PRINT . LPAREN STR COMA expression RPAREN
-    (6) statement -> TAB PRINT . LPAREN expression RPAREN
+    (18) expression -> expression DIVIDE . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    LPAREN          shift and go to state 37
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 41
+    list_error                     shift and go to state 14
 
 state 21
 
-    (4) statement -> PRINT LPAREN . STR COMA expression RPAREN
-    (5) statement -> PRINT LPAREN . expression RPAREN
-    (9) statement -> PRINT LPAREN . expression
-    (10) statement -> PRINT LPAREN .
-    (51) expression -> LPAREN . expression RPAREN
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (19) expression -> expression POTENCY . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    STR             shift and go to state 38
-    $end            reduce using rule 10 (statement -> PRINT LPAREN .)
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
-    expression                     shift and go to state 39
+    expression                     shift and go to state 42
+    list_error                     shift and go to state 14
 
 state 22
 
-    (8) statement -> PRINT expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (20) expression -> expression DIVIDE_INT . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    $end            reduce using rule 8 (statement -> PRINT expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 43
+    list_error                     shift and go to state 14
 
 state 23
 
-    (11) statement -> PRINT TAB . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (4) statement -> TAB PRINT . LPAREN STR COMA expression RPAREN
+    (7) statement -> TAB PRINT . LPAREN expression RPAREN
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    LPAREN          shift and go to state 44
 
-    expression                     shift and go to state 40
 
 state 24
 
-    (52) expression -> NAME .
+    (5) statement -> PRINT LPAREN . STR COMA expression RPAREN
+    (6) statement -> PRINT LPAREN . expression RPAREN
+    (10) statement -> PRINT LPAREN . expression
+    (11) statement -> PRINT LPAREN .
+    (63) expression -> LPAREN . expression RPAREN
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    PLUS            reduce using rule 52 (expression -> NAME .)
-    MINUS           reduce using rule 52 (expression -> NAME .)
-    TIMES           reduce using rule 52 (expression -> NAME .)
-    DIVIDE          reduce using rule 52 (expression -> NAME .)
-    POTENCY         reduce using rule 52 (expression -> NAME .)
-    DIVIDE_INT      reduce using rule 52 (expression -> NAME .)
-    $end            reduce using rule 52 (expression -> NAME .)
-    RPAREN          reduce using rule 52 (expression -> NAME .)
-    DIGUAL          reduce using rule 52 (expression -> NAME .)
-    DIFERENTE       reduce using rule 52 (expression -> NAME .)
-    MAYORQUE        reduce using rule 52 (expression -> NAME .)
-    MENORQUE        reduce using rule 52 (expression -> NAME .)
-    DOSPUNTOS       reduce using rule 52 (expression -> NAME .)
-    TAB             reduce using rule 52 (expression -> NAME .)
+    STR             shift and go to state 45
+    $end            reduce using rule 11 (statement -> PRINT LPAREN .)
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 46
+    list_error                     shift and go to state 14
 
 state 25
 
-    (51) expression -> LPAREN expression . RPAREN
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (9) statement -> PRINT expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    RPAREN          shift and go to state 41
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    $end            reduce using rule 9 (statement -> PRINT expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 26
 
-    (26) statement -> IF LPAREN . condition RPAREN DOSPUNTOS
-    (27) statement -> IF LPAREN . condition RPAREN
-    (29) statement -> IF LPAREN . condition
-    (30) statement -> IF LPAREN .
-    (31) statement -> IF LPAREN . expression
-    (32) statement -> IF LPAREN . condition DOSPUNTOS
-    (20) condition -> . expression DIGUAL expression
-    (21) condition -> . expression DIFERENTE expression
-    (22) condition -> . expression MAYORQUE expression
-    (23) condition -> . expression MENORQUE expression
-    (24) condition -> . condition TAB AND TAB condition
-    (25) condition -> . condition TAB OR TAB condition
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (12) statement -> PRINT TAB . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    $end            reduce using rule 30 (statement -> IF LPAREN .)
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
-    condition                      shift and go to state 42
-    expression                     shift and go to state 43
+    expression                     shift and go to state 47
+    list_error                     shift and go to state 14
 
 state 27
 
-    (28) statement -> IF TAB . condition DOSPUNTOS
-    (20) condition -> . expression DIGUAL expression
-    (21) condition -> . expression DIFERENTE expression
-    (22) condition -> . expression MAYORQUE expression
-    (23) condition -> . expression MENORQUE expression
-    (24) condition -> . condition TAB AND TAB condition
-    (25) condition -> . condition TAB OR TAB condition
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (64) expression -> NAME .
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    PLUS            reduce using rule 64 (expression -> NAME .)
+    MINUS           reduce using rule 64 (expression -> NAME .)
+    TIMES           reduce using rule 64 (expression -> NAME .)
+    DIVIDE          reduce using rule 64 (expression -> NAME .)
+    POTENCY         reduce using rule 64 (expression -> NAME .)
+    DIVIDE_INT      reduce using rule 64 (expression -> NAME .)
+    $end            reduce using rule 64 (expression -> NAME .)
+    RPAREN          reduce using rule 64 (expression -> NAME .)
+    COMA            reduce using rule 64 (expression -> NAME .)
+    RCORCHETE       reduce using rule 64 (expression -> NAME .)
+    DIGUAL          reduce using rule 64 (expression -> NAME .)
+    DIFERENTE       reduce using rule 64 (expression -> NAME .)
+    MAYORQUE        reduce using rule 64 (expression -> NAME .)
+    MENORQUE        reduce using rule 64 (expression -> NAME .)
+    DOSPUNTOS       reduce using rule 64 (expression -> NAME .)
+    TAB             reduce using rule 64 (expression -> NAME .)
 
-    condition                      shift and go to state 44
-    expression                     shift and go to state 45
 
 state 28
 
-    (33) statement -> ELSE DOSPUNTOS .
+    (63) expression -> LPAREN expression . RPAREN
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    $end            reduce using rule 33 (statement -> ELSE DOSPUNTOS .)
+    RPAREN          shift and go to state 48
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 29
 
-    (47) expression -> MINUS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (27) statement -> IF LPAREN . condition RPAREN DOSPUNTOS
+    (28) statement -> IF LPAREN . condition RPAREN
+    (30) statement -> IF LPAREN . condition
+    (31) statement -> IF LPAREN .
+    (32) statement -> IF LPAREN . expression
+    (33) statement -> IF LPAREN . condition DOSPUNTOS
+    (21) condition -> . expression DIGUAL expression
+    (22) condition -> . expression DIFERENTE expression
+    (23) condition -> . expression MAYORQUE expression
+    (24) condition -> . expression MENORQUE expression
+    (25) condition -> . condition TAB AND TAB condition
+    (26) condition -> . condition TAB OR TAB condition
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    PLUS            reduce using rule 47 (expression -> MINUS expression .)
-    MINUS           reduce using rule 47 (expression -> MINUS expression .)
-    TIMES           reduce using rule 47 (expression -> MINUS expression .)
-    DIVIDE          reduce using rule 47 (expression -> MINUS expression .)
-    POTENCY         reduce using rule 47 (expression -> MINUS expression .)
-    DIVIDE_INT      reduce using rule 47 (expression -> MINUS expression .)
-    $end            reduce using rule 47 (expression -> MINUS expression .)
-    RPAREN          reduce using rule 47 (expression -> MINUS expression .)
-    DIGUAL          reduce using rule 47 (expression -> MINUS expression .)
-    DIFERENTE       reduce using rule 47 (expression -> MINUS expression .)
-    MAYORQUE        reduce using rule 47 (expression -> MINUS expression .)
-    MENORQUE        reduce using rule 47 (expression -> MINUS expression .)
-    DOSPUNTOS       reduce using rule 47 (expression -> MINUS expression .)
-    TAB             reduce using rule 47 (expression -> MINUS expression .)
+    $end            reduce using rule 31 (statement -> IF LPAREN .)
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
-  ! PLUS            [ shift and go to state 14 ]
-  ! MINUS           [ shift and go to state 15 ]
-  ! TIMES           [ shift and go to state 16 ]
-  ! DIVIDE          [ shift and go to state 17 ]
-  ! POTENCY         [ shift and go to state 18 ]
-  ! DIVIDE_INT      [ shift and go to state 19 ]
-
+    condition                      shift and go to state 49
+    expression                     shift and go to state 50
+    list_error                     shift and go to state 14
 
 state 30
 
-    (12) expresasign -> NAME EQUALS . expression
-    (13) expresasign -> NAME EQUALS . exprenumpy
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
-    (35) exprenumpy -> . NUMPY POINT numpyfunc
+    (29) statement -> IF TAB . condition DOSPUNTOS
+    (21) condition -> . expression DIGUAL expression
+    (22) condition -> . expression DIFERENTE expression
+    (23) condition -> . expression MAYORQUE expression
+    (24) condition -> . expression MENORQUE expression
+    (25) condition -> . condition TAB AND TAB condition
+    (26) condition -> . condition TAB OR TAB condition
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
-    NUMPY           shift and go to state 48
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
-    expression                     shift and go to state 46
-    exprenumpy                     shift and go to state 47
+    condition                      shift and go to state 51
+    expression                     shift and go to state 52
+    list_error                     shift and go to state 14
 
 state 31
 
-    (14) expression -> expression PLUS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (34) statement -> ELSE DOSPUNTOS .
 
-    PLUS            reduce using rule 14 (expression -> expression PLUS expression .)
-    MINUS           reduce using rule 14 (expression -> expression PLUS expression .)
-    POTENCY         reduce using rule 14 (expression -> expression PLUS expression .)
-    DIVIDE_INT      reduce using rule 14 (expression -> expression PLUS expression .)
-    $end            reduce using rule 14 (expression -> expression PLUS expression .)
-    RPAREN          reduce using rule 14 (expression -> expression PLUS expression .)
-    DIGUAL          reduce using rule 14 (expression -> expression PLUS expression .)
-    DIFERENTE       reduce using rule 14 (expression -> expression PLUS expression .)
-    MAYORQUE        reduce using rule 14 (expression -> expression PLUS expression .)
-    MENORQUE        reduce using rule 14 (expression -> expression PLUS expression .)
-    DOSPUNTOS       reduce using rule 14 (expression -> expression PLUS expression .)
-    TAB             reduce using rule 14 (expression -> expression PLUS expression .)
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-
-  ! TIMES           [ reduce using rule 14 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 14 (expression -> expression PLUS expression .) ]
-  ! PLUS            [ shift and go to state 14 ]
-  ! MINUS           [ shift and go to state 15 ]
-  ! POTENCY         [ shift and go to state 18 ]
-  ! DIVIDE_INT      [ shift and go to state 19 ]
+    $end            reduce using rule 34 (statement -> ELSE DOSPUNTOS .)
 
 
 state 32
 
-    (15) expression -> expression MINUS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (53) expression -> MINUS expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    PLUS            reduce using rule 15 (expression -> expression MINUS expression .)
-    MINUS           reduce using rule 15 (expression -> expression MINUS expression .)
-    POTENCY         reduce using rule 15 (expression -> expression MINUS expression .)
-    DIVIDE_INT      reduce using rule 15 (expression -> expression MINUS expression .)
-    $end            reduce using rule 15 (expression -> expression MINUS expression .)
-    RPAREN          reduce using rule 15 (expression -> expression MINUS expression .)
-    DIGUAL          reduce using rule 15 (expression -> expression MINUS expression .)
-    DIFERENTE       reduce using rule 15 (expression -> expression MINUS expression .)
-    MAYORQUE        reduce using rule 15 (expression -> expression MINUS expression .)
-    MENORQUE        reduce using rule 15 (expression -> expression MINUS expression .)
-    DOSPUNTOS       reduce using rule 15 (expression -> expression MINUS expression .)
-    TAB             reduce using rule 15 (expression -> expression MINUS expression .)
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
+    PLUS            reduce using rule 53 (expression -> MINUS expression .)
+    MINUS           reduce using rule 53 (expression -> MINUS expression .)
+    TIMES           reduce using rule 53 (expression -> MINUS expression .)
+    DIVIDE          reduce using rule 53 (expression -> MINUS expression .)
+    POTENCY         reduce using rule 53 (expression -> MINUS expression .)
+    DIVIDE_INT      reduce using rule 53 (expression -> MINUS expression .)
+    $end            reduce using rule 53 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 53 (expression -> MINUS expression .)
+    COMA            reduce using rule 53 (expression -> MINUS expression .)
+    RCORCHETE       reduce using rule 53 (expression -> MINUS expression .)
+    DIGUAL          reduce using rule 53 (expression -> MINUS expression .)
+    DIFERENTE       reduce using rule 53 (expression -> MINUS expression .)
+    MAYORQUE        reduce using rule 53 (expression -> MINUS expression .)
+    MENORQUE        reduce using rule 53 (expression -> MINUS expression .)
+    DOSPUNTOS       reduce using rule 53 (expression -> MINUS expression .)
+    TAB             reduce using rule 53 (expression -> MINUS expression .)
 
-  ! TIMES           [ reduce using rule 15 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 15 (expression -> expression MINUS expression .) ]
-  ! PLUS            [ shift and go to state 14 ]
-  ! MINUS           [ shift and go to state 15 ]
-  ! POTENCY         [ shift and go to state 18 ]
-  ! DIVIDE_INT      [ shift and go to state 19 ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+  ! POTENCY         [ shift and go to state 21 ]
+  ! DIVIDE_INT      [ shift and go to state 22 ]
 
 
 state 33
 
-    (16) expression -> expression TIMES expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (56) expression -> LCORCHETE expression_list . RCORCHETE
+    (59) list_error -> LCORCHETE expression_list .
+    (60) list_error -> LCORCHETE expression_list . COMA
 
-    PLUS            reduce using rule 16 (expression -> expression TIMES expression .)
-    MINUS           reduce using rule 16 (expression -> expression TIMES expression .)
-    TIMES           reduce using rule 16 (expression -> expression TIMES expression .)
-    DIVIDE          reduce using rule 16 (expression -> expression TIMES expression .)
-    POTENCY         reduce using rule 16 (expression -> expression TIMES expression .)
-    DIVIDE_INT      reduce using rule 16 (expression -> expression TIMES expression .)
-    $end            reduce using rule 16 (expression -> expression TIMES expression .)
-    RPAREN          reduce using rule 16 (expression -> expression TIMES expression .)
-    DIGUAL          reduce using rule 16 (expression -> expression TIMES expression .)
-    DIFERENTE       reduce using rule 16 (expression -> expression TIMES expression .)
-    MAYORQUE        reduce using rule 16 (expression -> expression TIMES expression .)
-    MENORQUE        reduce using rule 16 (expression -> expression TIMES expression .)
-    DOSPUNTOS       reduce using rule 16 (expression -> expression TIMES expression .)
-    TAB             reduce using rule 16 (expression -> expression TIMES expression .)
+  ! shift/reduce conflict for RCORCHETE resolved as shift
+  ! shift/reduce conflict for COMA resolved as shift
+    RCORCHETE       shift and go to state 53
+    PLUS            reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    MINUS           reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    TIMES           reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    DIVIDE          reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    POTENCY         reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    DIVIDE_INT      reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    $end            reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    RPAREN          reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    DIGUAL          reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    DIFERENTE       reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    MAYORQUE        reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    MENORQUE        reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    DOSPUNTOS       reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    TAB             reduce using rule 59 (list_error -> LCORCHETE expression_list .)
+    COMA            shift and go to state 54
 
-  ! PLUS            [ shift and go to state 14 ]
-  ! MINUS           [ shift and go to state 15 ]
-  ! TIMES           [ shift and go to state 16 ]
-  ! DIVIDE          [ shift and go to state 17 ]
-  ! POTENCY         [ shift and go to state 18 ]
-  ! DIVIDE_INT      [ shift and go to state 19 ]
+  ! COMA            [ reduce using rule 59 (list_error -> LCORCHETE expression_list .) ]
+  ! RCORCHETE       [ reduce using rule 59 (list_error -> LCORCHETE expression_list .) ]
 
 
 state 34
 
-    (17) expression -> expression DIVIDE expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (57) expression -> LCORCHETE RCORCHETE .
 
-    PLUS            reduce using rule 17 (expression -> expression DIVIDE expression .)
-    MINUS           reduce using rule 17 (expression -> expression DIVIDE expression .)
-    TIMES           reduce using rule 17 (expression -> expression DIVIDE expression .)
-    DIVIDE          reduce using rule 17 (expression -> expression DIVIDE expression .)
-    POTENCY         reduce using rule 17 (expression -> expression DIVIDE expression .)
-    DIVIDE_INT      reduce using rule 17 (expression -> expression DIVIDE expression .)
-    $end            reduce using rule 17 (expression -> expression DIVIDE expression .)
-    RPAREN          reduce using rule 17 (expression -> expression DIVIDE expression .)
-    DIGUAL          reduce using rule 17 (expression -> expression DIVIDE expression .)
-    DIFERENTE       reduce using rule 17 (expression -> expression DIVIDE expression .)
-    MAYORQUE        reduce using rule 17 (expression -> expression DIVIDE expression .)
-    MENORQUE        reduce using rule 17 (expression -> expression DIVIDE expression .)
-    DOSPUNTOS       reduce using rule 17 (expression -> expression DIVIDE expression .)
-    TAB             reduce using rule 17 (expression -> expression DIVIDE expression .)
-
-  ! PLUS            [ shift and go to state 14 ]
-  ! MINUS           [ shift and go to state 15 ]
-  ! TIMES           [ shift and go to state 16 ]
-  ! DIVIDE          [ shift and go to state 17 ]
-  ! POTENCY         [ shift and go to state 18 ]
-  ! DIVIDE_INT      [ shift and go to state 19 ]
+    PLUS            reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    MINUS           reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    TIMES           reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    DIVIDE          reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    POTENCY         reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    DIVIDE_INT      reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    $end            reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    RPAREN          reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    COMA            reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    RCORCHETE       reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    DIGUAL          reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    DIFERENTE       reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    MAYORQUE        reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    MENORQUE        reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    DOSPUNTOS       reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
+    TAB             reduce using rule 57 (expression -> LCORCHETE RCORCHETE .)
 
 
 state 35
 
-    (18) expression -> expression POTENCY expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (61) expression_list -> expression . COMA expression_list
+    (62) expression_list -> expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
+  ! shift/reduce conflict for COMA resolved as shift
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
   ! shift/reduce conflict for TIMES resolved as shift
   ! shift/reduce conflict for DIVIDE resolved as shift
   ! shift/reduce conflict for POTENCY resolved as shift
   ! shift/reduce conflict for DIVIDE_INT resolved as shift
-    $end            reduce using rule 18 (expression -> expression POTENCY expression .)
-    RPAREN          reduce using rule 18 (expression -> expression POTENCY expression .)
-    DIGUAL          reduce using rule 18 (expression -> expression POTENCY expression .)
-    DIFERENTE       reduce using rule 18 (expression -> expression POTENCY expression .)
-    MAYORQUE        reduce using rule 18 (expression -> expression POTENCY expression .)
-    MENORQUE        reduce using rule 18 (expression -> expression POTENCY expression .)
-    DOSPUNTOS       reduce using rule 18 (expression -> expression POTENCY expression .)
-    TAB             reduce using rule 18 (expression -> expression POTENCY expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    COMA            shift and go to state 55
+    $end            reduce using rule 62 (expression_list -> expression .)
+    RPAREN          reduce using rule 62 (expression_list -> expression .)
+    RCORCHETE       reduce using rule 62 (expression_list -> expression .)
+    DIGUAL          reduce using rule 62 (expression_list -> expression .)
+    DIFERENTE       reduce using rule 62 (expression_list -> expression .)
+    MAYORQUE        reduce using rule 62 (expression_list -> expression .)
+    MENORQUE        reduce using rule 62 (expression_list -> expression .)
+    DOSPUNTOS       reduce using rule 62 (expression_list -> expression .)
+    TAB             reduce using rule 62 (expression_list -> expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
-  ! PLUS            [ reduce using rule 18 (expression -> expression POTENCY expression .) ]
-  ! MINUS           [ reduce using rule 18 (expression -> expression POTENCY expression .) ]
-  ! TIMES           [ reduce using rule 18 (expression -> expression POTENCY expression .) ]
-  ! DIVIDE          [ reduce using rule 18 (expression -> expression POTENCY expression .) ]
-  ! POTENCY         [ reduce using rule 18 (expression -> expression POTENCY expression .) ]
-  ! DIVIDE_INT      [ reduce using rule 18 (expression -> expression POTENCY expression .) ]
+  ! PLUS            [ reduce using rule 62 (expression_list -> expression .) ]
+  ! MINUS           [ reduce using rule 62 (expression_list -> expression .) ]
+  ! TIMES           [ reduce using rule 62 (expression_list -> expression .) ]
+  ! DIVIDE          [ reduce using rule 62 (expression_list -> expression .) ]
+  ! POTENCY         [ reduce using rule 62 (expression_list -> expression .) ]
+  ! DIVIDE_INT      [ reduce using rule 62 (expression_list -> expression .) ]
+  ! COMA            [ reduce using rule 62 (expression_list -> expression .) ]
 
 
 state 36
 
-    (19) expression -> expression DIVIDE_INT expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (13) expresasign -> NAME EQUALS . expression
+    (14) expresasign -> NAME EQUALS . expression_numpy
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (36) expression_numpy -> . NUMPY POINT numpyfunc
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
+
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
+    NUMPY           shift and go to state 16
+
+    expression                     shift and go to state 56
+    expression_numpy               shift and go to state 57
+    list_error                     shift and go to state 14
+
+state 37
+
+    (36) expression_numpy -> NUMPY POINT . numpyfunc
+    (37) numpyfunc -> . ARRAY array
+    (38) numpyfunc -> . ARANGE arange
+    (39) numpyfunc -> . ARANGE arange_error
+    (40) numpyfunc -> . ARRAY array_error
+    (41) numpyfunc -> . ARGMAX argmax
+    (42) numpyfunc -> . ARGMAX argmax_error
+
+    ARRAY           shift and go to state 59
+    ARANGE          shift and go to state 60
+    ARGMAX          shift and go to state 61
+
+    numpyfunc                      shift and go to state 58
+
+state 38
+
+    (15) expression -> expression PLUS expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
+
+    PLUS            reduce using rule 15 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 15 (expression -> expression PLUS expression .)
+    POTENCY         reduce using rule 15 (expression -> expression PLUS expression .)
+    DIVIDE_INT      reduce using rule 15 (expression -> expression PLUS expression .)
+    $end            reduce using rule 15 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 15 (expression -> expression PLUS expression .)
+    COMA            reduce using rule 15 (expression -> expression PLUS expression .)
+    RCORCHETE       reduce using rule 15 (expression -> expression PLUS expression .)
+    DIGUAL          reduce using rule 15 (expression -> expression PLUS expression .)
+    DIFERENTE       reduce using rule 15 (expression -> expression PLUS expression .)
+    MAYORQUE        reduce using rule 15 (expression -> expression PLUS expression .)
+    MENORQUE        reduce using rule 15 (expression -> expression PLUS expression .)
+    DOSPUNTOS       reduce using rule 15 (expression -> expression PLUS expression .)
+    TAB             reduce using rule 15 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+
+  ! TIMES           [ reduce using rule 15 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 15 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! POTENCY         [ shift and go to state 21 ]
+  ! DIVIDE_INT      [ shift and go to state 22 ]
+
+
+state 39
+
+    (16) expression -> expression MINUS expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
+
+    PLUS            reduce using rule 16 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 16 (expression -> expression MINUS expression .)
+    POTENCY         reduce using rule 16 (expression -> expression MINUS expression .)
+    DIVIDE_INT      reduce using rule 16 (expression -> expression MINUS expression .)
+    $end            reduce using rule 16 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 16 (expression -> expression MINUS expression .)
+    COMA            reduce using rule 16 (expression -> expression MINUS expression .)
+    RCORCHETE       reduce using rule 16 (expression -> expression MINUS expression .)
+    DIGUAL          reduce using rule 16 (expression -> expression MINUS expression .)
+    DIFERENTE       reduce using rule 16 (expression -> expression MINUS expression .)
+    MAYORQUE        reduce using rule 16 (expression -> expression MINUS expression .)
+    MENORQUE        reduce using rule 16 (expression -> expression MINUS expression .)
+    DOSPUNTOS       reduce using rule 16 (expression -> expression MINUS expression .)
+    TAB             reduce using rule 16 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+
+  ! TIMES           [ reduce using rule 16 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 16 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! POTENCY         [ shift and go to state 21 ]
+  ! DIVIDE_INT      [ shift and go to state 22 ]
+
+
+state 40
+
+    (17) expression -> expression TIMES expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
+
+    PLUS            reduce using rule 17 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 17 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 17 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 17 (expression -> expression TIMES expression .)
+    POTENCY         reduce using rule 17 (expression -> expression TIMES expression .)
+    DIVIDE_INT      reduce using rule 17 (expression -> expression TIMES expression .)
+    $end            reduce using rule 17 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 17 (expression -> expression TIMES expression .)
+    COMA            reduce using rule 17 (expression -> expression TIMES expression .)
+    RCORCHETE       reduce using rule 17 (expression -> expression TIMES expression .)
+    DIGUAL          reduce using rule 17 (expression -> expression TIMES expression .)
+    DIFERENTE       reduce using rule 17 (expression -> expression TIMES expression .)
+    MAYORQUE        reduce using rule 17 (expression -> expression TIMES expression .)
+    MENORQUE        reduce using rule 17 (expression -> expression TIMES expression .)
+    DOSPUNTOS       reduce using rule 17 (expression -> expression TIMES expression .)
+    TAB             reduce using rule 17 (expression -> expression TIMES expression .)
+
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+  ! POTENCY         [ shift and go to state 21 ]
+  ! DIVIDE_INT      [ shift and go to state 22 ]
+
+
+state 41
+
+    (18) expression -> expression DIVIDE expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
+
+    PLUS            reduce using rule 18 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 18 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 18 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 18 (expression -> expression DIVIDE expression .)
+    POTENCY         reduce using rule 18 (expression -> expression DIVIDE expression .)
+    DIVIDE_INT      reduce using rule 18 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 18 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 18 (expression -> expression DIVIDE expression .)
+    COMA            reduce using rule 18 (expression -> expression DIVIDE expression .)
+    RCORCHETE       reduce using rule 18 (expression -> expression DIVIDE expression .)
+    DIGUAL          reduce using rule 18 (expression -> expression DIVIDE expression .)
+    DIFERENTE       reduce using rule 18 (expression -> expression DIVIDE expression .)
+    MAYORQUE        reduce using rule 18 (expression -> expression DIVIDE expression .)
+    MENORQUE        reduce using rule 18 (expression -> expression DIVIDE expression .)
+    DOSPUNTOS       reduce using rule 18 (expression -> expression DIVIDE expression .)
+    TAB             reduce using rule 18 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+  ! POTENCY         [ shift and go to state 21 ]
+  ! DIVIDE_INT      [ shift and go to state 22 ]
+
+
+state 42
+
+    (19) expression -> expression POTENCY expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
@@ -982,961 +1227,1323 @@ state 36
   ! shift/reduce conflict for DIVIDE resolved as shift
   ! shift/reduce conflict for POTENCY resolved as shift
   ! shift/reduce conflict for DIVIDE_INT resolved as shift
-    $end            reduce using rule 19 (expression -> expression DIVIDE_INT expression .)
-    RPAREN          reduce using rule 19 (expression -> expression DIVIDE_INT expression .)
-    DIGUAL          reduce using rule 19 (expression -> expression DIVIDE_INT expression .)
-    DIFERENTE       reduce using rule 19 (expression -> expression DIVIDE_INT expression .)
-    MAYORQUE        reduce using rule 19 (expression -> expression DIVIDE_INT expression .)
-    MENORQUE        reduce using rule 19 (expression -> expression DIVIDE_INT expression .)
-    DOSPUNTOS       reduce using rule 19 (expression -> expression DIVIDE_INT expression .)
-    TAB             reduce using rule 19 (expression -> expression DIVIDE_INT expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    $end            reduce using rule 19 (expression -> expression POTENCY expression .)
+    RPAREN          reduce using rule 19 (expression -> expression POTENCY expression .)
+    COMA            reduce using rule 19 (expression -> expression POTENCY expression .)
+    RCORCHETE       reduce using rule 19 (expression -> expression POTENCY expression .)
+    DIGUAL          reduce using rule 19 (expression -> expression POTENCY expression .)
+    DIFERENTE       reduce using rule 19 (expression -> expression POTENCY expression .)
+    MAYORQUE        reduce using rule 19 (expression -> expression POTENCY expression .)
+    MENORQUE        reduce using rule 19 (expression -> expression POTENCY expression .)
+    DOSPUNTOS       reduce using rule 19 (expression -> expression POTENCY expression .)
+    TAB             reduce using rule 19 (expression -> expression POTENCY expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
-  ! PLUS            [ reduce using rule 19 (expression -> expression DIVIDE_INT expression .) ]
-  ! MINUS           [ reduce using rule 19 (expression -> expression DIVIDE_INT expression .) ]
-  ! TIMES           [ reduce using rule 19 (expression -> expression DIVIDE_INT expression .) ]
-  ! DIVIDE          [ reduce using rule 19 (expression -> expression DIVIDE_INT expression .) ]
-  ! POTENCY         [ reduce using rule 19 (expression -> expression DIVIDE_INT expression .) ]
-  ! DIVIDE_INT      [ reduce using rule 19 (expression -> expression DIVIDE_INT expression .) ]
-
-
-state 37
-
-    (3) statement -> TAB PRINT LPAREN . STR COMA expression RPAREN
-    (6) statement -> TAB PRINT LPAREN . expression RPAREN
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
-
-    STR             shift and go to state 49
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
-
-    expression                     shift and go to state 50
-
-state 38
-
-    (4) statement -> PRINT LPAREN STR . COMA expression RPAREN
-    (49) expression -> STR .
-
-    COMA            shift and go to state 51
-    RPAREN          reduce using rule 49 (expression -> STR .)
-    PLUS            reduce using rule 49 (expression -> STR .)
-    MINUS           reduce using rule 49 (expression -> STR .)
-    TIMES           reduce using rule 49 (expression -> STR .)
-    DIVIDE          reduce using rule 49 (expression -> STR .)
-    POTENCY         reduce using rule 49 (expression -> STR .)
-    DIVIDE_INT      reduce using rule 49 (expression -> STR .)
-    $end            reduce using rule 49 (expression -> STR .)
-
-
-state 39
-
-    (5) statement -> PRINT LPAREN expression . RPAREN
-    (9) statement -> PRINT LPAREN expression .
-    (51) expression -> LPAREN expression . RPAREN
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
-
-    RPAREN          shift and go to state 52
-    $end            reduce using rule 9 (statement -> PRINT LPAREN expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
-
-
-state 40
-
-    (11) statement -> PRINT TAB expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
-
-    $end            reduce using rule 11 (statement -> PRINT TAB expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
-
-
-state 41
-
-    (51) expression -> LPAREN expression RPAREN .
-
-    PLUS            reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    TIMES           reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    POTENCY         reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    DIVIDE_INT      reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    $end            reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    DIGUAL          reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    DIFERENTE       reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    MAYORQUE        reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    MENORQUE        reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    DOSPUNTOS       reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    TAB             reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-
-
-state 42
-
-    (26) statement -> IF LPAREN condition . RPAREN DOSPUNTOS
-    (27) statement -> IF LPAREN condition . RPAREN
-    (29) statement -> IF LPAREN condition .
-    (32) statement -> IF LPAREN condition . DOSPUNTOS
-    (24) condition -> condition . TAB AND TAB condition
-    (25) condition -> condition . TAB OR TAB condition
-
-    RPAREN          shift and go to state 53
-    $end            reduce using rule 29 (statement -> IF LPAREN condition .)
-    DOSPUNTOS       shift and go to state 54
-    TAB             shift and go to state 55
+  ! PLUS            [ reduce using rule 19 (expression -> expression POTENCY expression .) ]
+  ! MINUS           [ reduce using rule 19 (expression -> expression POTENCY expression .) ]
+  ! TIMES           [ reduce using rule 19 (expression -> expression POTENCY expression .) ]
+  ! DIVIDE          [ reduce using rule 19 (expression -> expression POTENCY expression .) ]
+  ! POTENCY         [ reduce using rule 19 (expression -> expression POTENCY expression .) ]
+  ! DIVIDE_INT      [ reduce using rule 19 (expression -> expression POTENCY expression .) ]
 
 
 state 43
 
-    (31) statement -> IF LPAREN expression .
-    (20) condition -> expression . DIGUAL expression
-    (21) condition -> expression . DIFERENTE expression
-    (22) condition -> expression . MAYORQUE expression
-    (23) condition -> expression . MENORQUE expression
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (20) expression -> expression DIVIDE_INT expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    $end            reduce using rule 31 (statement -> IF LPAREN expression .)
-    DIGUAL          shift and go to state 56
-    DIFERENTE       shift and go to state 57
-    MAYORQUE        shift and go to state 58
-    MENORQUE        shift and go to state 59
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POTENCY resolved as shift
+  ! shift/reduce conflict for DIVIDE_INT resolved as shift
+    $end            reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    RPAREN          reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    COMA            reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    RCORCHETE       reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    DIGUAL          reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    DIFERENTE       reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    MAYORQUE        reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    MENORQUE        reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    DOSPUNTOS       reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    TAB             reduce using rule 20 (expression -> expression DIVIDE_INT expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
+
+  ! PLUS            [ reduce using rule 20 (expression -> expression DIVIDE_INT expression .) ]
+  ! MINUS           [ reduce using rule 20 (expression -> expression DIVIDE_INT expression .) ]
+  ! TIMES           [ reduce using rule 20 (expression -> expression DIVIDE_INT expression .) ]
+  ! DIVIDE          [ reduce using rule 20 (expression -> expression DIVIDE_INT expression .) ]
+  ! POTENCY         [ reduce using rule 20 (expression -> expression DIVIDE_INT expression .) ]
+  ! DIVIDE_INT      [ reduce using rule 20 (expression -> expression DIVIDE_INT expression .) ]
 
 
 state 44
 
-    (28) statement -> IF TAB condition . DOSPUNTOS
-    (24) condition -> condition . TAB AND TAB condition
-    (25) condition -> condition . TAB OR TAB condition
+    (4) statement -> TAB PRINT LPAREN . STR COMA expression RPAREN
+    (7) statement -> TAB PRINT LPAREN . expression RPAREN
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    DOSPUNTOS       shift and go to state 60
-    TAB             shift and go to state 55
+    STR             shift and go to state 62
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 63
+    list_error                     shift and go to state 14
 
 state 45
 
-    (20) condition -> expression . DIGUAL expression
-    (21) condition -> expression . DIFERENTE expression
-    (22) condition -> expression . MAYORQUE expression
-    (23) condition -> expression . MENORQUE expression
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (5) statement -> PRINT LPAREN STR . COMA expression RPAREN
+    (55) expression -> STR .
 
-    DIGUAL          shift and go to state 56
-    DIFERENTE       shift and go to state 57
-    MAYORQUE        shift and go to state 58
-    MENORQUE        shift and go to state 59
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    COMA            shift and go to state 64
+    RPAREN          reduce using rule 55 (expression -> STR .)
+    PLUS            reduce using rule 55 (expression -> STR .)
+    MINUS           reduce using rule 55 (expression -> STR .)
+    TIMES           reduce using rule 55 (expression -> STR .)
+    DIVIDE          reduce using rule 55 (expression -> STR .)
+    POTENCY         reduce using rule 55 (expression -> STR .)
+    DIVIDE_INT      reduce using rule 55 (expression -> STR .)
+    $end            reduce using rule 55 (expression -> STR .)
 
 
 state 46
 
-    (12) expresasign -> NAME EQUALS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (6) statement -> PRINT LPAREN expression . RPAREN
+    (10) statement -> PRINT LPAREN expression .
+    (63) expression -> LPAREN expression . RPAREN
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    $end            reduce using rule 12 (expresasign -> NAME EQUALS expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    RPAREN          shift and go to state 65
+    $end            reduce using rule 10 (statement -> PRINT LPAREN expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 47
 
-    (13) expresasign -> NAME EQUALS exprenumpy .
+    (12) statement -> PRINT TAB expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    $end            reduce using rule 13 (expresasign -> NAME EQUALS exprenumpy .)
+    $end            reduce using rule 12 (statement -> PRINT TAB expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 48
 
-    (35) exprenumpy -> NUMPY . POINT numpyfunc
+    (63) expression -> LPAREN expression RPAREN .
 
-    POINT           shift and go to state 61
+    PLUS            reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    POTENCY         reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    DIVIDE_INT      reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    $end            reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    COMA            reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    RCORCHETE       reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    DIGUAL          reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    DIFERENTE       reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    MAYORQUE        reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    MENORQUE        reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    DOSPUNTOS       reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    TAB             reduce using rule 63 (expression -> LPAREN expression RPAREN .)
 
 
 state 49
 
-    (3) statement -> TAB PRINT LPAREN STR . COMA expression RPAREN
-    (49) expression -> STR .
+    (27) statement -> IF LPAREN condition . RPAREN DOSPUNTOS
+    (28) statement -> IF LPAREN condition . RPAREN
+    (30) statement -> IF LPAREN condition .
+    (33) statement -> IF LPAREN condition . DOSPUNTOS
+    (25) condition -> condition . TAB AND TAB condition
+    (26) condition -> condition . TAB OR TAB condition
 
-    COMA            shift and go to state 62
-    RPAREN          reduce using rule 49 (expression -> STR .)
-    PLUS            reduce using rule 49 (expression -> STR .)
-    MINUS           reduce using rule 49 (expression -> STR .)
-    TIMES           reduce using rule 49 (expression -> STR .)
-    DIVIDE          reduce using rule 49 (expression -> STR .)
-    POTENCY         reduce using rule 49 (expression -> STR .)
-    DIVIDE_INT      reduce using rule 49 (expression -> STR .)
+    RPAREN          shift and go to state 66
+    $end            reduce using rule 30 (statement -> IF LPAREN condition .)
+    DOSPUNTOS       shift and go to state 67
+    TAB             shift and go to state 68
 
 
 state 50
 
-    (6) statement -> TAB PRINT LPAREN expression . RPAREN
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (32) statement -> IF LPAREN expression .
+    (21) condition -> expression . DIGUAL expression
+    (22) condition -> expression . DIFERENTE expression
+    (23) condition -> expression . MAYORQUE expression
+    (24) condition -> expression . MENORQUE expression
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    RPAREN          shift and go to state 63
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    $end            reduce using rule 32 (statement -> IF LPAREN expression .)
+    DIGUAL          shift and go to state 69
+    DIFERENTE       shift and go to state 70
+    MAYORQUE        shift and go to state 71
+    MENORQUE        shift and go to state 72
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 51
 
-    (4) statement -> PRINT LPAREN STR COMA . expression RPAREN
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (29) statement -> IF TAB condition . DOSPUNTOS
+    (25) condition -> condition . TAB AND TAB condition
+    (26) condition -> condition . TAB OR TAB condition
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    DOSPUNTOS       shift and go to state 73
+    TAB             shift and go to state 68
 
-    expression                     shift and go to state 64
 
 state 52
 
-    (5) statement -> PRINT LPAREN expression RPAREN .
-    (51) expression -> LPAREN expression RPAREN .
+    (21) condition -> expression . DIGUAL expression
+    (22) condition -> expression . DIFERENTE expression
+    (23) condition -> expression . MAYORQUE expression
+    (24) condition -> expression . MENORQUE expression
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-  ! reduce/reduce conflict for $end resolved using rule 5 (statement -> PRINT LPAREN expression RPAREN .)
-    $end            reduce using rule 5 (statement -> PRINT LPAREN expression RPAREN .)
-    PLUS            reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    TIMES           reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    POTENCY         reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-    DIVIDE_INT      reduce using rule 51 (expression -> LPAREN expression RPAREN .)
-
-  ! $end            [ reduce using rule 51 (expression -> LPAREN expression RPAREN .) ]
+    DIGUAL          shift and go to state 69
+    DIFERENTE       shift and go to state 70
+    MAYORQUE        shift and go to state 71
+    MENORQUE        shift and go to state 72
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 53
 
-    (26) statement -> IF LPAREN condition RPAREN . DOSPUNTOS
-    (27) statement -> IF LPAREN condition RPAREN .
+    (56) expression -> LCORCHETE expression_list RCORCHETE .
 
-    DOSPUNTOS       shift and go to state 65
-    $end            reduce using rule 27 (statement -> IF LPAREN condition RPAREN .)
+    PLUS            reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    MINUS           reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    TIMES           reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    DIVIDE          reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    POTENCY         reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    DIVIDE_INT      reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    $end            reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    RPAREN          reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    COMA            reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    RCORCHETE       reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    DIGUAL          reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    DIFERENTE       reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    MAYORQUE        reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    MENORQUE        reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    DOSPUNTOS       reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
+    TAB             reduce using rule 56 (expression -> LCORCHETE expression_list RCORCHETE .)
 
 
 state 54
 
-    (32) statement -> IF LPAREN condition DOSPUNTOS .
+    (60) list_error -> LCORCHETE expression_list COMA .
 
-    $end            reduce using rule 32 (statement -> IF LPAREN condition DOSPUNTOS .)
+    PLUS            reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    MINUS           reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    TIMES           reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    DIVIDE          reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    POTENCY         reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    DIVIDE_INT      reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    $end            reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    RPAREN          reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    COMA            reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    RCORCHETE       reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    DIGUAL          reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    DIFERENTE       reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    MAYORQUE        reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    MENORQUE        reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    DOSPUNTOS       reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
+    TAB             reduce using rule 60 (list_error -> LCORCHETE expression_list COMA .)
 
 
 state 55
 
-    (24) condition -> condition TAB . AND TAB condition
-    (25) condition -> condition TAB . OR TAB condition
+    (61) expression_list -> expression COMA . expression_list
+    (61) expression_list -> . expression COMA expression_list
+    (62) expression_list -> . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    AND             shift and go to state 66
-    OR              shift and go to state 67
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 35
+    expression_list                shift and go to state 74
+    list_error                     shift and go to state 14
 
 state 56
 
-    (20) condition -> expression DIGUAL . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (13) expresasign -> NAME EQUALS expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    $end            reduce using rule 13 (expresasign -> NAME EQUALS expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
-    expression                     shift and go to state 68
 
 state 57
 
-    (21) condition -> expression DIFERENTE . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (14) expresasign -> NAME EQUALS expression_numpy .
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    $end            reduce using rule 14 (expresasign -> NAME EQUALS expression_numpy .)
 
-    expression                     shift and go to state 69
 
 state 58
 
-    (22) condition -> expression MAYORQUE . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (36) expression_numpy -> NUMPY POINT numpyfunc .
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    $end            reduce using rule 36 (expression_numpy -> NUMPY POINT numpyfunc .)
 
-    expression                     shift and go to state 70
 
 state 59
 
-    (23) condition -> expression MENORQUE . expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (37) numpyfunc -> ARRAY . array
+    (40) numpyfunc -> ARRAY . array_error
+    (43) array -> . LPAREN NAME RPAREN
+    (44) array -> . LPAREN NUMBER RPAREN
+    (45) array -> . LPAREN expression RPAREN
+    (46) array_error -> . LPAREN STR RPAREN
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    LPAREN          shift and go to state 77
 
-    expression                     shift and go to state 71
+    array                          shift and go to state 75
+    array_error                    shift and go to state 76
 
 state 60
 
-    (28) statement -> IF TAB condition DOSPUNTOS .
+    (38) numpyfunc -> ARANGE . arange
+    (39) numpyfunc -> ARANGE . arange_error
+    (47) arange -> . LPAREN NUMBER RPAREN
+    (48) arange -> . LPAREN NAME RPAREN
+    (49) arange_error -> . LPAREN STR RPAREN
 
-    $end            reduce using rule 28 (statement -> IF TAB condition DOSPUNTOS .)
+    LPAREN          shift and go to state 80
 
+    arange                         shift and go to state 78
+    arange_error                   shift and go to state 79
 
 state 61
 
-    (35) exprenumpy -> NUMPY POINT . numpyfunc
-    (36) numpyfunc -> . ARRAY numpyarg
-    (37) numpyfunc -> . SUM numpyarg
-    (38) numpyfunc -> . RESHAPE numpyarg
-    (39) numpyfunc -> . MEAN numpyarg
-    (40) numpyfunc -> . ARANGE numpyarg
-    (41) numpyfunc -> . ARANGE numpyarg_error
+    (41) numpyfunc -> ARGMAX . argmax
+    (42) numpyfunc -> ARGMAX . argmax_error
+    (50) argmax -> . LPAREN NAME RPAREN
+    (51) argmax -> . LPAREN expression RPAREN
+    (52) argmax_error -> . LPAREN STR RPAREN
 
-    ARRAY           shift and go to state 73
-    SUM             shift and go to state 74
-    RESHAPE         shift and go to state 75
-    MEAN            shift and go to state 76
-    ARANGE          shift and go to state 77
+    LPAREN          shift and go to state 83
 
-    numpyfunc                      shift and go to state 72
+    argmax                         shift and go to state 81
+    argmax_error                   shift and go to state 82
 
 state 62
 
-    (3) statement -> TAB PRINT LPAREN STR COMA . expression RPAREN
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (4) statement -> TAB PRINT LPAREN STR . COMA expression RPAREN
+    (55) expression -> STR .
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    COMA            shift and go to state 84
+    RPAREN          reduce using rule 55 (expression -> STR .)
+    PLUS            reduce using rule 55 (expression -> STR .)
+    MINUS           reduce using rule 55 (expression -> STR .)
+    TIMES           reduce using rule 55 (expression -> STR .)
+    DIVIDE          reduce using rule 55 (expression -> STR .)
+    POTENCY         reduce using rule 55 (expression -> STR .)
+    DIVIDE_INT      reduce using rule 55 (expression -> STR .)
 
-    expression                     shift and go to state 78
 
 state 63
 
-    (6) statement -> TAB PRINT LPAREN expression RPAREN .
+    (7) statement -> TAB PRINT LPAREN expression . RPAREN
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    $end            reduce using rule 6 (statement -> TAB PRINT LPAREN expression RPAREN .)
+    RPAREN          shift and go to state 85
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 64
 
-    (4) statement -> PRINT LPAREN STR COMA expression . RPAREN
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (5) statement -> PRINT LPAREN STR COMA . expression RPAREN
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    RPAREN          shift and go to state 79
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 86
+    list_error                     shift and go to state 14
 
 state 65
 
-    (26) statement -> IF LPAREN condition RPAREN DOSPUNTOS .
+    (6) statement -> PRINT LPAREN expression RPAREN .
+    (63) expression -> LPAREN expression RPAREN .
 
-    $end            reduce using rule 26 (statement -> IF LPAREN condition RPAREN DOSPUNTOS .)
+  ! reduce/reduce conflict for $end resolved using rule 6 (statement -> PRINT LPAREN expression RPAREN .)
+    $end            reduce using rule 6 (statement -> PRINT LPAREN expression RPAREN .)
+    PLUS            reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    POTENCY         reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+    DIVIDE_INT      reduce using rule 63 (expression -> LPAREN expression RPAREN .)
+
+  ! $end            [ reduce using rule 63 (expression -> LPAREN expression RPAREN .) ]
 
 
 state 66
 
-    (24) condition -> condition TAB AND . TAB condition
+    (27) statement -> IF LPAREN condition RPAREN . DOSPUNTOS
+    (28) statement -> IF LPAREN condition RPAREN .
 
-    TAB             shift and go to state 80
+    DOSPUNTOS       shift and go to state 87
+    $end            reduce using rule 28 (statement -> IF LPAREN condition RPAREN .)
 
 
 state 67
 
-    (25) condition -> condition TAB OR . TAB condition
+    (33) statement -> IF LPAREN condition DOSPUNTOS .
 
-    TAB             shift and go to state 81
+    $end            reduce using rule 33 (statement -> IF LPAREN condition DOSPUNTOS .)
 
 
 state 68
 
-    (20) condition -> expression DIGUAL expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (25) condition -> condition TAB . AND TAB condition
+    (26) condition -> condition TAB . OR TAB condition
 
-    RPAREN          reduce using rule 20 (condition -> expression DIGUAL expression .)
-    DOSPUNTOS       reduce using rule 20 (condition -> expression DIGUAL expression .)
-    TAB             reduce using rule 20 (condition -> expression DIGUAL expression .)
-    $end            reduce using rule 20 (condition -> expression DIGUAL expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    AND             shift and go to state 88
+    OR              shift and go to state 89
 
 
 state 69
 
-    (21) condition -> expression DIFERENTE expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (21) condition -> expression DIGUAL . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    RPAREN          reduce using rule 21 (condition -> expression DIFERENTE expression .)
-    DOSPUNTOS       reduce using rule 21 (condition -> expression DIFERENTE expression .)
-    TAB             reduce using rule 21 (condition -> expression DIFERENTE expression .)
-    $end            reduce using rule 21 (condition -> expression DIFERENTE expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 90
+    list_error                     shift and go to state 14
 
 state 70
 
-    (22) condition -> expression MAYORQUE expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (22) condition -> expression DIFERENTE . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    RPAREN          reduce using rule 22 (condition -> expression MAYORQUE expression .)
-    DOSPUNTOS       reduce using rule 22 (condition -> expression MAYORQUE expression .)
-    TAB             reduce using rule 22 (condition -> expression MAYORQUE expression .)
-    $end            reduce using rule 22 (condition -> expression MAYORQUE expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 91
+    list_error                     shift and go to state 14
 
 state 71
 
-    (23) condition -> expression MENORQUE expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (23) condition -> expression MAYORQUE . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    RPAREN          reduce using rule 23 (condition -> expression MENORQUE expression .)
-    DOSPUNTOS       reduce using rule 23 (condition -> expression MENORQUE expression .)
-    TAB             reduce using rule 23 (condition -> expression MENORQUE expression .)
-    $end            reduce using rule 23 (condition -> expression MENORQUE expression .)
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 92
+    list_error                     shift and go to state 14
 
 state 72
 
-    (35) exprenumpy -> NUMPY POINT numpyfunc .
+    (24) condition -> expression MENORQUE . expression
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    $end            reduce using rule 35 (exprenumpy -> NUMPY POINT numpyfunc .)
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 93
+    list_error                     shift and go to state 14
 
 state 73
 
-    (36) numpyfunc -> ARRAY . numpyarg
-    (42) numpyarg -> . LPAREN NUMBER RPAREN
-    (43) numpyarg -> . LPAREN NAME RPAREN
+    (29) statement -> IF TAB condition DOSPUNTOS .
 
-    LPAREN          shift and go to state 83
+    $end            reduce using rule 29 (statement -> IF TAB condition DOSPUNTOS .)
 
-    numpyarg                       shift and go to state 82
 
 state 74
 
-    (37) numpyfunc -> SUM . numpyarg
-    (42) numpyarg -> . LPAREN NUMBER RPAREN
-    (43) numpyarg -> . LPAREN NAME RPAREN
+    (61) expression_list -> expression COMA expression_list .
 
-    LPAREN          shift and go to state 83
+    PLUS            reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    MINUS           reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    TIMES           reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    DIVIDE          reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    POTENCY         reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    DIVIDE_INT      reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    $end            reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    RPAREN          reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    COMA            reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    RCORCHETE       reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    DIGUAL          reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    DIFERENTE       reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    MAYORQUE        reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    MENORQUE        reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    DOSPUNTOS       reduce using rule 61 (expression_list -> expression COMA expression_list .)
+    TAB             reduce using rule 61 (expression_list -> expression COMA expression_list .)
 
-    numpyarg                       shift and go to state 84
 
 state 75
 
-    (38) numpyfunc -> RESHAPE . numpyarg
-    (42) numpyarg -> . LPAREN NUMBER RPAREN
-    (43) numpyarg -> . LPAREN NAME RPAREN
+    (37) numpyfunc -> ARRAY array .
 
-    LPAREN          shift and go to state 83
+    $end            reduce using rule 37 (numpyfunc -> ARRAY array .)
 
-    numpyarg                       shift and go to state 85
 
 state 76
 
-    (39) numpyfunc -> MEAN . numpyarg
-    (42) numpyarg -> . LPAREN NUMBER RPAREN
-    (43) numpyarg -> . LPAREN NAME RPAREN
+    (40) numpyfunc -> ARRAY array_error .
 
-    LPAREN          shift and go to state 83
+    $end            reduce using rule 40 (numpyfunc -> ARRAY array_error .)
 
-    numpyarg                       shift and go to state 86
 
 state 77
 
-    (40) numpyfunc -> ARANGE . numpyarg
-    (41) numpyfunc -> ARANGE . numpyarg_error
-    (42) numpyarg -> . LPAREN NUMBER RPAREN
-    (43) numpyarg -> . LPAREN NAME RPAREN
-    (44) numpyarg_error -> . LPAREN STR RPAREN
-    (45) numpyarg_error -> . LPAREN LIST RPAREN
-    (46) numpyarg_error -> . LPAREN RPAREN
+    (43) array -> LPAREN . NAME RPAREN
+    (44) array -> LPAREN . NUMBER RPAREN
+    (45) array -> LPAREN . expression RPAREN
+    (46) array_error -> LPAREN . STR RPAREN
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    LPAREN          shift and go to state 89
+    NAME            shift and go to state 94
+    NUMBER          shift and go to state 95
+    STR             shift and go to state 97
+    MINUS           shift and go to state 11
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
 
-    numpyarg                       shift and go to state 87
-    numpyarg_error                 shift and go to state 88
+    expression                     shift and go to state 96
+    list_error                     shift and go to state 14
 
 state 78
 
-    (3) statement -> TAB PRINT LPAREN STR COMA expression . RPAREN
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . TIMES expression
-    (17) expression -> expression . DIVIDE expression
-    (18) expression -> expression . POTENCY expression
-    (19) expression -> expression . DIVIDE_INT expression
+    (38) numpyfunc -> ARANGE arange .
 
-    RPAREN          shift and go to state 90
-    PLUS            shift and go to state 14
-    MINUS           shift and go to state 15
-    TIMES           shift and go to state 16
-    DIVIDE          shift and go to state 17
-    POTENCY         shift and go to state 18
-    DIVIDE_INT      shift and go to state 19
+    $end            reduce using rule 38 (numpyfunc -> ARANGE arange .)
 
 
 state 79
 
-    (4) statement -> PRINT LPAREN STR COMA expression RPAREN .
+    (39) numpyfunc -> ARANGE arange_error .
 
-    $end            reduce using rule 4 (statement -> PRINT LPAREN STR COMA expression RPAREN .)
+    $end            reduce using rule 39 (numpyfunc -> ARANGE arange_error .)
 
 
 state 80
 
-    (24) condition -> condition TAB AND TAB . condition
-    (20) condition -> . expression DIGUAL expression
-    (21) condition -> . expression DIFERENTE expression
-    (22) condition -> . expression MAYORQUE expression
-    (23) condition -> . expression MENORQUE expression
-    (24) condition -> . condition TAB AND TAB condition
-    (25) condition -> . condition TAB OR TAB condition
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (47) arange -> LPAREN . NUMBER RPAREN
+    (48) arange -> LPAREN . NAME RPAREN
+    (49) arange_error -> LPAREN . STR RPAREN
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    NUMBER          shift and go to state 98
+    NAME            shift and go to state 99
+    STR             shift and go to state 100
 
-    condition                      shift and go to state 91
-    expression                     shift and go to state 45
 
 state 81
 
-    (25) condition -> condition TAB OR TAB . condition
-    (20) condition -> . expression DIGUAL expression
-    (21) condition -> . expression DIFERENTE expression
-    (22) condition -> . expression MAYORQUE expression
-    (23) condition -> . expression MENORQUE expression
-    (24) condition -> . condition TAB AND TAB condition
-    (25) condition -> . condition TAB OR TAB condition
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression TIMES expression
-    (17) expression -> . expression DIVIDE expression
-    (18) expression -> . expression POTENCY expression
-    (19) expression -> . expression DIVIDE_INT expression
-    (47) expression -> . MINUS expression
-    (48) expression -> . NUMBER
-    (49) expression -> . STR
-    (50) expression -> . LIST
-    (51) expression -> . LPAREN expression RPAREN
-    (52) expression -> . NAME
+    (41) numpyfunc -> ARGMAX argmax .
 
-    MINUS           shift and go to state 10
-    NUMBER          shift and go to state 11
-    STR             shift and go to state 7
-    LIST            shift and go to state 12
-    LPAREN          shift and go to state 6
-    NAME            shift and go to state 24
+    $end            reduce using rule 41 (numpyfunc -> ARGMAX argmax .)
 
-    condition                      shift and go to state 92
-    expression                     shift and go to state 45
 
 state 82
 
-    (36) numpyfunc -> ARRAY numpyarg .
+    (42) numpyfunc -> ARGMAX argmax_error .
 
-    $end            reduce using rule 36 (numpyfunc -> ARRAY numpyarg .)
+    $end            reduce using rule 42 (numpyfunc -> ARGMAX argmax_error .)
 
 
 state 83
 
-    (42) numpyarg -> LPAREN . NUMBER RPAREN
-    (43) numpyarg -> LPAREN . NAME RPAREN
+    (50) argmax -> LPAREN . NAME RPAREN
+    (51) argmax -> LPAREN . expression RPAREN
+    (52) argmax_error -> LPAREN . STR RPAREN
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    NUMBER          shift and go to state 93
-    NAME            shift and go to state 94
+    NAME            shift and go to state 101
+    STR             shift and go to state 103
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
 
+    expression                     shift and go to state 102
+    list_error                     shift and go to state 14
 
 state 84
 
-    (37) numpyfunc -> SUM numpyarg .
+    (4) statement -> TAB PRINT LPAREN STR COMA . expression RPAREN
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
 
-    $end            reduce using rule 37 (numpyfunc -> SUM numpyarg .)
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
 
+    expression                     shift and go to state 104
+    list_error                     shift and go to state 14
 
 state 85
 
-    (38) numpyfunc -> RESHAPE numpyarg .
+    (7) statement -> TAB PRINT LPAREN expression RPAREN .
 
-    $end            reduce using rule 38 (numpyfunc -> RESHAPE numpyarg .)
+    $end            reduce using rule 7 (statement -> TAB PRINT LPAREN expression RPAREN .)
 
 
 state 86
 
-    (39) numpyfunc -> MEAN numpyarg .
+    (5) statement -> PRINT LPAREN STR COMA expression . RPAREN
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    $end            reduce using rule 39 (numpyfunc -> MEAN numpyarg .)
+    RPAREN          shift and go to state 105
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 87
 
-    (40) numpyfunc -> ARANGE numpyarg .
+    (27) statement -> IF LPAREN condition RPAREN DOSPUNTOS .
 
-    $end            reduce using rule 40 (numpyfunc -> ARANGE numpyarg .)
+    $end            reduce using rule 27 (statement -> IF LPAREN condition RPAREN DOSPUNTOS .)
 
 
 state 88
 
-    (41) numpyfunc -> ARANGE numpyarg_error .
+    (25) condition -> condition TAB AND . TAB condition
 
-    $end            reduce using rule 41 (numpyfunc -> ARANGE numpyarg_error .)
+    TAB             shift and go to state 106
 
 
 state 89
 
-    (42) numpyarg -> LPAREN . NUMBER RPAREN
-    (43) numpyarg -> LPAREN . NAME RPAREN
-    (44) numpyarg_error -> LPAREN . STR RPAREN
-    (45) numpyarg_error -> LPAREN . LIST RPAREN
-    (46) numpyarg_error -> LPAREN . RPAREN
+    (26) condition -> condition TAB OR . TAB condition
 
-    NUMBER          shift and go to state 93
-    NAME            shift and go to state 94
-    STR             shift and go to state 96
-    LIST            shift and go to state 97
-    RPAREN          shift and go to state 95
+    TAB             shift and go to state 107
 
 
 state 90
 
-    (3) statement -> TAB PRINT LPAREN STR COMA expression RPAREN .
+    (21) condition -> expression DIGUAL expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    $end            reduce using rule 3 (statement -> TAB PRINT LPAREN STR COMA expression RPAREN .)
+    RPAREN          reduce using rule 21 (condition -> expression DIGUAL expression .)
+    DOSPUNTOS       reduce using rule 21 (condition -> expression DIGUAL expression .)
+    TAB             reduce using rule 21 (condition -> expression DIGUAL expression .)
+    $end            reduce using rule 21 (condition -> expression DIGUAL expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 91
 
-    (24) condition -> condition TAB AND TAB condition .
-    (24) condition -> condition . TAB AND TAB condition
-    (25) condition -> condition . TAB OR TAB condition
+    (22) condition -> expression DIFERENTE expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-  ! shift/reduce conflict for TAB resolved as shift
-    RPAREN          reduce using rule 24 (condition -> condition TAB AND TAB condition .)
-    DOSPUNTOS       reduce using rule 24 (condition -> condition TAB AND TAB condition .)
-    $end            reduce using rule 24 (condition -> condition TAB AND TAB condition .)
-    TAB             shift and go to state 55
-
-  ! TAB             [ reduce using rule 24 (condition -> condition TAB AND TAB condition .) ]
+    RPAREN          reduce using rule 22 (condition -> expression DIFERENTE expression .)
+    DOSPUNTOS       reduce using rule 22 (condition -> expression DIFERENTE expression .)
+    TAB             reduce using rule 22 (condition -> expression DIFERENTE expression .)
+    $end            reduce using rule 22 (condition -> expression DIFERENTE expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 92
 
-    (25) condition -> condition TAB OR TAB condition .
-    (24) condition -> condition . TAB AND TAB condition
-    (25) condition -> condition . TAB OR TAB condition
+    (23) condition -> expression MAYORQUE expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-  ! shift/reduce conflict for TAB resolved as shift
-    RPAREN          reduce using rule 25 (condition -> condition TAB OR TAB condition .)
-    DOSPUNTOS       reduce using rule 25 (condition -> condition TAB OR TAB condition .)
-    $end            reduce using rule 25 (condition -> condition TAB OR TAB condition .)
-    TAB             shift and go to state 55
-
-  ! TAB             [ reduce using rule 25 (condition -> condition TAB OR TAB condition .) ]
+    RPAREN          reduce using rule 23 (condition -> expression MAYORQUE expression .)
+    DOSPUNTOS       reduce using rule 23 (condition -> expression MAYORQUE expression .)
+    TAB             reduce using rule 23 (condition -> expression MAYORQUE expression .)
+    $end            reduce using rule 23 (condition -> expression MAYORQUE expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 93
 
-    (42) numpyarg -> LPAREN NUMBER . RPAREN
+    (24) condition -> expression MENORQUE expression .
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    RPAREN          shift and go to state 98
+    RPAREN          reduce using rule 24 (condition -> expression MENORQUE expression .)
+    DOSPUNTOS       reduce using rule 24 (condition -> expression MENORQUE expression .)
+    TAB             reduce using rule 24 (condition -> expression MENORQUE expression .)
+    $end            reduce using rule 24 (condition -> expression MENORQUE expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 94
 
-    (43) numpyarg -> LPAREN NAME . RPAREN
+    (43) array -> LPAREN NAME . RPAREN
+    (64) expression -> NAME .
 
-    RPAREN          shift and go to state 99
+    RPAREN          reduce using rule 64 (expression -> NAME .)
+    PLUS            reduce using rule 64 (expression -> NAME .)
+    MINUS           reduce using rule 64 (expression -> NAME .)
+    TIMES           reduce using rule 64 (expression -> NAME .)
+    DIVIDE          reduce using rule 64 (expression -> NAME .)
+    POTENCY         reduce using rule 64 (expression -> NAME .)
+    DIVIDE_INT      reduce using rule 64 (expression -> NAME .)
+
+  ! RPAREN          [ shift and go to state 108 ]
 
 
 state 95
 
-    (46) numpyarg_error -> LPAREN RPAREN .
+    (44) array -> LPAREN NUMBER . RPAREN
+    (54) expression -> NUMBER .
 
-    $end            reduce using rule 46 (numpyarg_error -> LPAREN RPAREN .)
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 109
+    PLUS            reduce using rule 54 (expression -> NUMBER .)
+    MINUS           reduce using rule 54 (expression -> NUMBER .)
+    TIMES           reduce using rule 54 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 54 (expression -> NUMBER .)
+    POTENCY         reduce using rule 54 (expression -> NUMBER .)
+    DIVIDE_INT      reduce using rule 54 (expression -> NUMBER .)
+
+  ! RPAREN          [ reduce using rule 54 (expression -> NUMBER .) ]
 
 
 state 96
 
-    (44) numpyarg_error -> LPAREN STR . RPAREN
+    (45) array -> LPAREN expression . RPAREN
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
 
-    RPAREN          shift and go to state 100
+    RPAREN          shift and go to state 110
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
 
 
 state 97
 
-    (45) numpyarg_error -> LPAREN LIST . RPAREN
+    (46) array_error -> LPAREN STR . RPAREN
+    (55) expression -> STR .
 
-    RPAREN          shift and go to state 101
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 111
+    PLUS            reduce using rule 55 (expression -> STR .)
+    MINUS           reduce using rule 55 (expression -> STR .)
+    TIMES           reduce using rule 55 (expression -> STR .)
+    DIVIDE          reduce using rule 55 (expression -> STR .)
+    POTENCY         reduce using rule 55 (expression -> STR .)
+    DIVIDE_INT      reduce using rule 55 (expression -> STR .)
+
+  ! RPAREN          [ reduce using rule 55 (expression -> STR .) ]
 
 
 state 98
 
-    (42) numpyarg -> LPAREN NUMBER RPAREN .
+    (47) arange -> LPAREN NUMBER . RPAREN
 
-    $end            reduce using rule 42 (numpyarg -> LPAREN NUMBER RPAREN .)
+    RPAREN          shift and go to state 112
 
 
 state 99
 
-    (43) numpyarg -> LPAREN NAME RPAREN .
+    (48) arange -> LPAREN NAME . RPAREN
 
-    $end            reduce using rule 43 (numpyarg -> LPAREN NAME RPAREN .)
+    RPAREN          shift and go to state 113
 
 
 state 100
 
-    (44) numpyarg_error -> LPAREN STR RPAREN .
+    (49) arange_error -> LPAREN STR . RPAREN
 
-    $end            reduce using rule 44 (numpyarg_error -> LPAREN STR RPAREN .)
+    RPAREN          shift and go to state 114
 
 
 state 101
 
-    (45) numpyarg_error -> LPAREN LIST RPAREN .
+    (50) argmax -> LPAREN NAME . RPAREN
+    (64) expression -> NAME .
 
-    $end            reduce using rule 45 (numpyarg_error -> LPAREN LIST RPAREN .)
+    RPAREN          reduce using rule 64 (expression -> NAME .)
+    PLUS            reduce using rule 64 (expression -> NAME .)
+    MINUS           reduce using rule 64 (expression -> NAME .)
+    TIMES           reduce using rule 64 (expression -> NAME .)
+    DIVIDE          reduce using rule 64 (expression -> NAME .)
+    POTENCY         reduce using rule 64 (expression -> NAME .)
+    DIVIDE_INT      reduce using rule 64 (expression -> NAME .)
+
+  ! RPAREN          [ shift and go to state 115 ]
+
+
+state 102
+
+    (51) argmax -> LPAREN expression . RPAREN
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
+
+    RPAREN          shift and go to state 116
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
+
+
+state 103
+
+    (52) argmax_error -> LPAREN STR . RPAREN
+    (55) expression -> STR .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 117
+    PLUS            reduce using rule 55 (expression -> STR .)
+    MINUS           reduce using rule 55 (expression -> STR .)
+    TIMES           reduce using rule 55 (expression -> STR .)
+    DIVIDE          reduce using rule 55 (expression -> STR .)
+    POTENCY         reduce using rule 55 (expression -> STR .)
+    DIVIDE_INT      reduce using rule 55 (expression -> STR .)
+
+  ! RPAREN          [ reduce using rule 55 (expression -> STR .) ]
+
+
+state 104
+
+    (4) statement -> TAB PRINT LPAREN STR COMA expression . RPAREN
+    (15) expression -> expression . PLUS expression
+    (16) expression -> expression . MINUS expression
+    (17) expression -> expression . TIMES expression
+    (18) expression -> expression . DIVIDE expression
+    (19) expression -> expression . POTENCY expression
+    (20) expression -> expression . DIVIDE_INT expression
+
+    RPAREN          shift and go to state 118
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POTENCY         shift and go to state 21
+    DIVIDE_INT      shift and go to state 22
+
+
+state 105
+
+    (5) statement -> PRINT LPAREN STR COMA expression RPAREN .
+
+    $end            reduce using rule 5 (statement -> PRINT LPAREN STR COMA expression RPAREN .)
+
+
+state 106
+
+    (25) condition -> condition TAB AND TAB . condition
+    (21) condition -> . expression DIGUAL expression
+    (22) condition -> . expression DIFERENTE expression
+    (23) condition -> . expression MAYORQUE expression
+    (24) condition -> . expression MENORQUE expression
+    (25) condition -> . condition TAB AND TAB condition
+    (26) condition -> . condition TAB OR TAB condition
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
+
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
+
+    condition                      shift and go to state 119
+    expression                     shift and go to state 52
+    list_error                     shift and go to state 14
+
+state 107
+
+    (26) condition -> condition TAB OR TAB . condition
+    (21) condition -> . expression DIGUAL expression
+    (22) condition -> . expression DIFERENTE expression
+    (23) condition -> . expression MAYORQUE expression
+    (24) condition -> . expression MENORQUE expression
+    (25) condition -> . condition TAB AND TAB condition
+    (26) condition -> . condition TAB OR TAB condition
+    (15) expression -> . expression PLUS expression
+    (16) expression -> . expression MINUS expression
+    (17) expression -> . expression TIMES expression
+    (18) expression -> . expression DIVIDE expression
+    (19) expression -> . expression POTENCY expression
+    (20) expression -> . expression DIVIDE_INT expression
+    (53) expression -> . MINUS expression
+    (54) expression -> . NUMBER
+    (55) expression -> . STR
+    (56) expression -> . LCORCHETE expression_list RCORCHETE
+    (57) expression -> . LCORCHETE RCORCHETE
+    (58) expression -> . list_error
+    (63) expression -> . LPAREN expression RPAREN
+    (64) expression -> . NAME
+    (59) list_error -> . LCORCHETE expression_list
+    (60) list_error -> . LCORCHETE expression_list COMA
+
+    MINUS           shift and go to state 11
+    NUMBER          shift and go to state 12
+    STR             shift and go to state 8
+    LCORCHETE       shift and go to state 13
+    LPAREN          shift and go to state 7
+    NAME            shift and go to state 27
+
+    condition                      shift and go to state 120
+    expression                     shift and go to state 52
+    list_error                     shift and go to state 14
+
+state 108
+
+    (43) array -> LPAREN NAME RPAREN .
+
+    $end            reduce using rule 43 (array -> LPAREN NAME RPAREN .)
+
+
+state 109
+
+    (44) array -> LPAREN NUMBER RPAREN .
+
+    $end            reduce using rule 44 (array -> LPAREN NUMBER RPAREN .)
+
+
+state 110
+
+    (45) array -> LPAREN expression RPAREN .
+
+    $end            reduce using rule 45 (array -> LPAREN expression RPAREN .)
+
+
+state 111
+
+    (46) array_error -> LPAREN STR RPAREN .
+
+    $end            reduce using rule 46 (array_error -> LPAREN STR RPAREN .)
+
+
+state 112
+
+    (47) arange -> LPAREN NUMBER RPAREN .
+
+    $end            reduce using rule 47 (arange -> LPAREN NUMBER RPAREN .)
+
+
+state 113
+
+    (48) arange -> LPAREN NAME RPAREN .
+
+    $end            reduce using rule 48 (arange -> LPAREN NAME RPAREN .)
+
+
+state 114
+
+    (49) arange_error -> LPAREN STR RPAREN .
+
+    $end            reduce using rule 49 (arange_error -> LPAREN STR RPAREN .)
+
+
+state 115
+
+    (50) argmax -> LPAREN NAME RPAREN .
+
+    $end            reduce using rule 50 (argmax -> LPAREN NAME RPAREN .)
+
+
+state 116
+
+    (51) argmax -> LPAREN expression RPAREN .
+
+    $end            reduce using rule 51 (argmax -> LPAREN expression RPAREN .)
+
+
+state 117
+
+    (52) argmax_error -> LPAREN STR RPAREN .
+
+    $end            reduce using rule 52 (argmax_error -> LPAREN STR RPAREN .)
+
+
+state 118
+
+    (4) statement -> TAB PRINT LPAREN STR COMA expression RPAREN .
+
+    $end            reduce using rule 4 (statement -> TAB PRINT LPAREN STR COMA expression RPAREN .)
+
+
+state 119
+
+    (25) condition -> condition TAB AND TAB condition .
+    (25) condition -> condition . TAB AND TAB condition
+    (26) condition -> condition . TAB OR TAB condition
+
+  ! shift/reduce conflict for TAB resolved as shift
+    RPAREN          reduce using rule 25 (condition -> condition TAB AND TAB condition .)
+    DOSPUNTOS       reduce using rule 25 (condition -> condition TAB AND TAB condition .)
+    $end            reduce using rule 25 (condition -> condition TAB AND TAB condition .)
+    TAB             shift and go to state 68
+
+  ! TAB             [ reduce using rule 25 (condition -> condition TAB AND TAB condition .) ]
+
+
+state 120
+
+    (26) condition -> condition TAB OR TAB condition .
+    (25) condition -> condition . TAB AND TAB condition
+    (26) condition -> condition . TAB OR TAB condition
+
+  ! shift/reduce conflict for TAB resolved as shift
+    RPAREN          reduce using rule 26 (condition -> condition TAB OR TAB condition .)
+    DOSPUNTOS       reduce using rule 26 (condition -> condition TAB OR TAB condition .)
+    $end            reduce using rule 26 (condition -> condition TAB OR TAB condition .)
+    TAB             shift and go to state 68
+
+  ! TAB             [ reduce using rule 26 (condition -> condition TAB OR TAB condition .) ]
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
+WARNING: shift/reduce conflict for RCORCHETE in state 33 resolved as shift
+WARNING: shift/reduce conflict for COMA in state 33 resolved as shift
+WARNING: shift/reduce conflict for COMA in state 35 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 35 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 35 resolved as shift
 WARNING: shift/reduce conflict for TIMES in state 35 resolved as shift
 WARNING: shift/reduce conflict for DIVIDE in state 35 resolved as shift
 WARNING: shift/reduce conflict for POTENCY in state 35 resolved as shift
 WARNING: shift/reduce conflict for DIVIDE_INT in state 35 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 36 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 36 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 36 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 36 resolved as shift
-WARNING: shift/reduce conflict for POTENCY in state 36 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE_INT in state 36 resolved as shift
-WARNING: shift/reduce conflict for TAB in state 91 resolved as shift
-WARNING: shift/reduce conflict for TAB in state 92 resolved as shift
-WARNING: reduce/reduce conflict in state 52 resolved using rule (statement -> PRINT LPAREN expression RPAREN)
-WARNING: rejected rule (expression -> LPAREN expression RPAREN) in state 52
+WARNING: shift/reduce conflict for PLUS in state 42 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 42 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 42 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 42 resolved as shift
+WARNING: shift/reduce conflict for POTENCY in state 42 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE_INT in state 42 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 43 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 43 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 43 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 43 resolved as shift
+WARNING: shift/reduce conflict for POTENCY in state 43 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE_INT in state 43 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 95 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 97 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 103 resolved as shift
+WARNING: shift/reduce conflict for TAB in state 119 resolved as shift
+WARNING: shift/reduce conflict for TAB in state 120 resolved as shift
+WARNING: reduce/reduce conflict in state 65 resolved using rule (statement -> PRINT LPAREN expression RPAREN)
+WARNING: rejected rule (expression -> LPAREN expression RPAREN) in state 65
