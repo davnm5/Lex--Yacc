@@ -1,4 +1,7 @@
 import numpy as np
 
-
-print(np.argmax(5))
+a=[1,2,3]
+b=np.array(a)
+d="hola"
+c=np.where(b<5,b,[1,2,3])
+print(c)

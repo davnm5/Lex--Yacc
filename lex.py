@@ -3,7 +3,7 @@ import numpy as np
 
 linea=0
 tokens = (
-    'NUMPY','ARANGE','ARGMAX',
+    'NUMPY','ARANGE','ARGMAX','ARGMIN','SUM','WHERE',
     'NAME','NUMBER',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
     'LPAREN','RPAREN','POTENCY','DIVIDE_INT','STR','LIST', 'ARRAY', 'RESHAPE', 'SUM' , 'MEAN','POINT','PRINT','IF','ELSE','MENORQUE',
@@ -70,11 +70,6 @@ def t_MEAN(t) :
     t.value = t.value
     return t
 
-def t_SUM(t) :
-    r'sum'
-    t.value = t.value
-    return t
-
 def t_ARANGE(t):
     r'arange'
     t.value = t.value
@@ -112,6 +107,21 @@ def t_DIGUAL(t):
 
 def t_ARGMAX(t):
     r'argmax'
+    t.value = t.value
+    return t
+
+def t_ARGMIN(t):
+    r'argmin'
+    t.value = t.value
+    return t
+
+def t_SUM(t):
+    r'sum'
+    t.value = t.value
+    return t
+
+def t_WHERE(t):
+    r'where'
     t.value = t.value
     return t
     
@@ -213,8 +223,30 @@ def p_if_error(p):
     
     print("ERROR: Sintaxis incorrecta en la sentencia IF ")
 
+def p_where(p):
+    ''' where : LPAREN condition_where COMA NAME COMA expression RPAREN '''
+    
+    try:
+        
+        if(str(p[6]).startswith("[") and str(p[6]).endswith("]")):
+            print("El tercer argumento de where no puede ser una lista")
+            
+        if(not str(names[p[4]]).startswith("np.array(") and not str(names[p[4]]).endswith(")")):
+            print("Error: En el segundo argumento la variable %s debe contener un array" %p[4])   
+    except:
+        print(" posi La variable %s no esta definida" %p[4])
     
 
+def p_condition_where(p):
+    ''' condition_where : NAME MENORQUE NUMBER
+                        | NAME MAYORQUE NUMBER
+                        | NAME DIGUAL NUMBER ''' 
+    try:
+        if(not str(names[p[1]]).startswith("np.array(") and not str(names[p[1]]).endswith(")")):
+            print("Error: En el primer argumento la variable %s debe contener un array"%p[1])   
+    except:
+        print("La variable %s no esta definida" %p[1])
+                
 def p_else(p):
     ''' statement : ELSE DOSPUNTOS '''
 
@@ -237,7 +269,12 @@ def p_numpyfuncion(p):
                  | ARANGE arange_error
                  | ARRAY array_error
                  | ARGMAX argmax
-                 | ARGMAX argmax_error '''
+                 | ARGMAX argmax_error
+                 | ARGMIN argmin
+                 | ARGMIN argmin_error
+                 | SUM sum
+                 | SUM sum_error
+                 | WHERE where '''
     p[0] = p[1]+str(p[2])
     
 
@@ -272,7 +309,7 @@ def p_arange(p):
         if(not str(names[p[2]]).isdigit()):
             print("ERROR: La variable no contiene un digito")
         else:
-            p[0]=p[2]
+            p[0]="("+str(p[2])+")"
              
     except: 
         print("")
@@ -281,9 +318,45 @@ def p_arange(p):
 def p_arange_error(p):
     ''' arange_error : LPAREN STR RPAREN '''
     print("Error: El argumento de arange debe ser un numero")
-    
+
+def p_argmin(p):
+    '''argmin : LPAREN NAME RPAREN
+                | LPAREN expression RPAREN '''
+    try:
+        p[0]=str(p[1])+str(p[2])+str(p[3])
+        if(not names[p[2]].startswith("[") and not names[p[2]].endswith("]")):
+            print("ERROR: La variable no contiene un array")
+        else:
+            p[0]=p[2]
+    except:
+        print("")
+
 def p_argmax(p):
     ''' argmax : LPAREN NAME RPAREN
+                | LPAREN expression RPAREN '''
+    try:
+        p[0]=str(p[1])+str(p[2])+str(p[3])
+        if(not names[p[2]].startswith("[") and not names[p[2]].endswith("]")):
+            print("ERROR: La variable no contiene un array")
+        else:
+            p[0]=p[2]
+    except:
+        print("")
+        
+def p_argmin_error(p):
+    '''
+    argmin_error : LPAREN STR RPAREN
+    '''    
+    print("ERROR: El argumento de argmin debe ser un array")
+
+def p_argmax_error(p):
+    '''
+    argmax_error : LPAREN STR RPAREN
+    '''    
+    print("ERROR: El argumento de argmax debe ser un array")
+    
+def p_sum(p):
+    ''' sum : LPAREN NAME RPAREN
                 | LPAREN expression RPAREN '''
     try:
         p[0]=str(p[1])+str(p[2])+str(p[3])
@@ -294,11 +367,11 @@ def p_argmax(p):
     except:
         print("")
 
-def p_argmax_error(p):
+def p_sum_error(p):
     '''
-    argmax_error : LPAREN STR RPAREN
+    sum_error : LPAREN STR RPAREN
     '''    
-    print("ERROR: El argumento de argmax debe ser una lista")
+    print("ERROR: El argumento de sum debe ser una lista")   
     
 def p_expression_uminus(p):
     'expression : MINUS expression %prec UMINUS'
