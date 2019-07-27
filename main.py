@@ -59,13 +59,13 @@ class App(Frame):
                     validar(i)
                     l_exec.append(i+'\n')
                     
-                ''''a=''.join(l_exec)
+                a=''.join(l_exec)
                 old_stdout = sys.stdout
                 redirected_output = sys.stdout = StringIO()
                 exec(a)
                 sys.stdout = old_stdout
                 result.configure(text=redirected_output.getvalue())
-                result.update()'''
+                result.update()
                     
 
 

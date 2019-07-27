@@ -1,7 +1,6 @@
 import re
 import numpy as np
 
-linea=0
 tokens = (
     'NUMPY','ARANGE','ARGMAX','ARGMIN','SUM','WHERE',
     'NAME','NUMBER',
@@ -201,6 +200,12 @@ def p_expression_binop(p):
         print("La operacion no es válida")
 
 
+
+
+def p_if(p):
+    ''' statement : IF LPAREN condition RPAREN DOSPUNTOS
+    '''
+
 def p_condition(p):
     ''' condition : expression DIGUAL expression
     | expression DIFERENTE expression
@@ -208,10 +213,6 @@ def p_condition(p):
     | expression MENORQUE expression
     | condition TAB AND TAB condition
     | condition TAB OR TAB condition '''
-
-def p_if(p):
-    ''' statement : IF LPAREN condition RPAREN DOSPUNTOS
-    '''
 
 def p_if_error(p):
     ''' statement : IF LPAREN condition RPAREN
@@ -234,7 +235,7 @@ def p_where(p):
         if(not str(names[p[4]]).startswith("np.array(") and not str(names[p[4]]).endswith(")")):
             print("Error: En el segundo argumento la variable %s debe contener un array" %p[4])   
     except:
-        print(" posi La variable %s no esta definida" %p[4])
+        print("La variable %s no esta definida" %p[4])
     
 
 def p_condition_where(p):

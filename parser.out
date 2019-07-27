@@ -30,13 +30,13 @@ Rule 17    expression -> expression TIMES expression
 Rule 18    expression -> expression DIVIDE expression
 Rule 19    expression -> expression POTENCY expression
 Rule 20    expression -> expression DIVIDE_INT expression
-Rule 21    condition -> expression DIGUAL expression
-Rule 22    condition -> expression DIFERENTE expression
-Rule 23    condition -> expression MAYORQUE expression
-Rule 24    condition -> expression MENORQUE expression
-Rule 25    condition -> condition TAB AND TAB condition
-Rule 26    condition -> condition TAB OR TAB condition
-Rule 27    statement -> IF LPAREN condition RPAREN DOSPUNTOS
+Rule 21    statement -> IF LPAREN condition RPAREN DOSPUNTOS
+Rule 22    condition -> expression DIGUAL expression
+Rule 23    condition -> expression DIFERENTE expression
+Rule 24    condition -> expression MAYORQUE expression
+Rule 25    condition -> expression MENORQUE expression
+Rule 26    condition -> condition TAB AND TAB condition
+Rule 27    condition -> condition TAB OR TAB condition
 Rule 28    statement -> IF LPAREN condition RPAREN
 Rule 29    statement -> IF TAB condition DOSPUNTOS
 Rule 30    statement -> IF LPAREN condition
@@ -92,42 +92,42 @@ Rule 79    expression -> NAME
 
 Terminals, with rules where they appear
 
-AND                  : 25
+AND                  : 26
 ARANGE               : 42 43
 ARGMAX               : 45 46
 ARGMIN               : 47 48
 ARRAY                : 41 44
 COMA                 : 4 5 34 34 75 76
-DIFERENTE            : 22
-DIGUAL               : 21 37
+DIFERENTE            : 23
+DIGUAL               : 22 37
 DIVIDE               : 18
 DIVIDE_INT           : 20
-DOSPUNTOS            : 27 29 33 38
+DOSPUNTOS            : 21 29 33 38
 ELSE                 : 38 39
 EQUALS               : 13 14
-IF                   : 27 28 29 30 31 32 33
+IF                   : 21 28 29 30 31 32 33
 LCORCHETE            : 71 72 74 75
 LINE                 : 
 LIST                 : 
-LPAREN               : 4 5 6 7 10 11 27 28 30 31 32 33 34 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 78
-MAYORQUE             : 23 36
+LPAREN               : 4 5 6 7 10 11 21 28 30 31 32 33 34 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 78
+MAYORQUE             : 24 36
 MEAN                 : 
-MENORQUE             : 24 35
+MENORQUE             : 25 35
 MINUS                : 16 68
 NAME                 : 13 14 34 35 36 37 52 57 59 61 65 79
 NUMBER               : 35 36 37 53 56 69
 NUMPY                : 40
-OR                   : 26
+OR                   : 27
 PLUS                 : 15
 POINT                : 40
 POTENCY              : 19
 PRINT                : 4 5 6 7 8 9 10 11 12
 RCORCHETE            : 71 72
 RESHAPE              : 
-RPAREN               : 4 5 6 7 27 28 34 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 78
+RPAREN               : 4 5 6 7 21 28 34 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 78
 STR                  : 4 5 55 58 63 64 67 70
 SUM                  : 49 50
-TAB                  : 4 7 12 25 25 26 26 29
+TAB                  : 4 7 12 26 26 27 27 29
 TIMES                : 17
 WHERE                : 51
 error                : 
@@ -142,10 +142,10 @@ argmin               : 47
 argmin_error         : 48
 array                : 41
 array_error          : 44
-condition            : 25 25 26 26 27 28 29 30 33
+condition            : 21 26 26 27 27 28 29 30 33
 condition_where      : 34
 expresasign          : 2
-expression           : 1 4 5 6 7 9 10 12 13 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 32 34 54 60 62 66 68 76 77 78
+expression           : 1 4 5 6 7 9 10 12 13 15 15 16 16 17 17 18 18 19 19 20 20 22 22 23 23 24 24 25 25 32 34 54 60 62 66 68 76 77 78
 expression_list      : 71 74 75 76
 expression_numpy     : 3 14
 list_error           : 73
@@ -172,7 +172,7 @@ state 0
     (10) statement -> . PRINT LPAREN expression
     (11) statement -> . PRINT LPAREN
     (12) statement -> . PRINT TAB expression
-    (27) statement -> . IF LPAREN condition RPAREN DOSPUNTOS
+    (21) statement -> . IF LPAREN condition RPAREN DOSPUNTOS
     (28) statement -> . IF LPAREN condition RPAREN
     (29) statement -> . IF TAB condition DOSPUNTOS
     (30) statement -> . IF LPAREN condition
@@ -358,7 +358,7 @@ state 8
 
 state 9
 
-    (27) statement -> IF . LPAREN condition RPAREN DOSPUNTOS
+    (21) statement -> IF . LPAREN condition RPAREN DOSPUNTOS
     (28) statement -> IF . LPAREN condition RPAREN
     (29) statement -> IF . TAB condition DOSPUNTOS
     (30) statement -> IF . LPAREN condition
@@ -828,18 +828,18 @@ state 28
 
 state 29
 
-    (27) statement -> IF LPAREN . condition RPAREN DOSPUNTOS
+    (21) statement -> IF LPAREN . condition RPAREN DOSPUNTOS
     (28) statement -> IF LPAREN . condition RPAREN
     (30) statement -> IF LPAREN . condition
     (31) statement -> IF LPAREN .
     (32) statement -> IF LPAREN . expression
     (33) statement -> IF LPAREN . condition DOSPUNTOS
-    (21) condition -> . expression DIGUAL expression
-    (22) condition -> . expression DIFERENTE expression
-    (23) condition -> . expression MAYORQUE expression
-    (24) condition -> . expression MENORQUE expression
-    (25) condition -> . condition TAB AND TAB condition
-    (26) condition -> . condition TAB OR TAB condition
+    (22) condition -> . expression DIGUAL expression
+    (23) condition -> . expression DIFERENTE expression
+    (24) condition -> . expression MAYORQUE expression
+    (25) condition -> . expression MENORQUE expression
+    (26) condition -> . condition TAB AND TAB condition
+    (27) condition -> . condition TAB OR TAB condition
     (15) expression -> . expression PLUS expression
     (16) expression -> . expression MINUS expression
     (17) expression -> . expression TIMES expression
@@ -872,12 +872,12 @@ state 29
 state 30
 
     (29) statement -> IF TAB . condition DOSPUNTOS
-    (21) condition -> . expression DIGUAL expression
-    (22) condition -> . expression DIFERENTE expression
-    (23) condition -> . expression MAYORQUE expression
-    (24) condition -> . expression MENORQUE expression
-    (25) condition -> . condition TAB AND TAB condition
-    (26) condition -> . condition TAB OR TAB condition
+    (22) condition -> . expression DIGUAL expression
+    (23) condition -> . expression DIFERENTE expression
+    (24) condition -> . expression MAYORQUE expression
+    (25) condition -> . expression MENORQUE expression
+    (26) condition -> . condition TAB AND TAB condition
+    (27) condition -> . condition TAB OR TAB condition
     (15) expression -> . expression PLUS expression
     (16) expression -> . expression MINUS expression
     (17) expression -> . expression TIMES expression
@@ -1435,12 +1435,12 @@ state 48
 
 state 49
 
-    (27) statement -> IF LPAREN condition . RPAREN DOSPUNTOS
+    (21) statement -> IF LPAREN condition . RPAREN DOSPUNTOS
     (28) statement -> IF LPAREN condition . RPAREN
     (30) statement -> IF LPAREN condition .
     (33) statement -> IF LPAREN condition . DOSPUNTOS
-    (25) condition -> condition . TAB AND TAB condition
-    (26) condition -> condition . TAB OR TAB condition
+    (26) condition -> condition . TAB AND TAB condition
+    (27) condition -> condition . TAB OR TAB condition
 
     RPAREN          shift and go to state 69
     $end            reduce using rule 30 (statement -> IF LPAREN condition .)
@@ -1451,10 +1451,10 @@ state 49
 state 50
 
     (32) statement -> IF LPAREN expression .
-    (21) condition -> expression . DIGUAL expression
-    (22) condition -> expression . DIFERENTE expression
-    (23) condition -> expression . MAYORQUE expression
-    (24) condition -> expression . MENORQUE expression
+    (22) condition -> expression . DIGUAL expression
+    (23) condition -> expression . DIFERENTE expression
+    (24) condition -> expression . MAYORQUE expression
+    (25) condition -> expression . MENORQUE expression
     (15) expression -> expression . PLUS expression
     (16) expression -> expression . MINUS expression
     (17) expression -> expression . TIMES expression
@@ -1478,8 +1478,8 @@ state 50
 state 51
 
     (29) statement -> IF TAB condition . DOSPUNTOS
-    (25) condition -> condition . TAB AND TAB condition
-    (26) condition -> condition . TAB OR TAB condition
+    (26) condition -> condition . TAB AND TAB condition
+    (27) condition -> condition . TAB OR TAB condition
 
     DOSPUNTOS       shift and go to state 76
     TAB             shift and go to state 71
@@ -1487,10 +1487,10 @@ state 51
 
 state 52
 
-    (21) condition -> expression . DIGUAL expression
-    (22) condition -> expression . DIFERENTE expression
-    (23) condition -> expression . MAYORQUE expression
-    (24) condition -> expression . MENORQUE expression
+    (22) condition -> expression . DIGUAL expression
+    (23) condition -> expression . DIFERENTE expression
+    (24) condition -> expression . MAYORQUE expression
+    (25) condition -> expression . MENORQUE expression
     (15) expression -> expression . PLUS expression
     (16) expression -> expression . MINUS expression
     (17) expression -> expression . TIMES expression
@@ -1778,7 +1778,7 @@ state 68
 
 state 69
 
-    (27) statement -> IF LPAREN condition RPAREN . DOSPUNTOS
+    (21) statement -> IF LPAREN condition RPAREN . DOSPUNTOS
     (28) statement -> IF LPAREN condition RPAREN .
 
     DOSPUNTOS       shift and go to state 98
@@ -1794,8 +1794,8 @@ state 70
 
 state 71
 
-    (25) condition -> condition TAB . AND TAB condition
-    (26) condition -> condition TAB . OR TAB condition
+    (26) condition -> condition TAB . AND TAB condition
+    (27) condition -> condition TAB . OR TAB condition
 
     AND             shift and go to state 99
     OR              shift and go to state 100
@@ -1803,7 +1803,7 @@ state 71
 
 state 72
 
-    (21) condition -> expression DIGUAL . expression
+    (22) condition -> expression DIGUAL . expression
     (15) expression -> . expression PLUS expression
     (16) expression -> . expression MINUS expression
     (17) expression -> . expression TIMES expression
@@ -1833,7 +1833,7 @@ state 72
 
 state 73
 
-    (22) condition -> expression DIFERENTE . expression
+    (23) condition -> expression DIFERENTE . expression
     (15) expression -> . expression PLUS expression
     (16) expression -> . expression MINUS expression
     (17) expression -> . expression TIMES expression
@@ -1863,7 +1863,7 @@ state 73
 
 state 74
 
-    (23) condition -> expression MAYORQUE . expression
+    (24) condition -> expression MAYORQUE . expression
     (15) expression -> . expression PLUS expression
     (16) expression -> . expression MINUS expression
     (17) expression -> . expression TIMES expression
@@ -1893,7 +1893,7 @@ state 74
 
 state 75
 
-    (24) condition -> expression MENORQUE . expression
+    (25) condition -> expression MENORQUE . expression
     (15) expression -> . expression PLUS expression
     (16) expression -> . expression MINUS expression
     (17) expression -> . expression TIMES expression
@@ -2236,28 +2236,28 @@ state 97
 
 state 98
 
-    (27) statement -> IF LPAREN condition RPAREN DOSPUNTOS .
+    (21) statement -> IF LPAREN condition RPAREN DOSPUNTOS .
 
-    $end            reduce using rule 27 (statement -> IF LPAREN condition RPAREN DOSPUNTOS .)
+    $end            reduce using rule 21 (statement -> IF LPAREN condition RPAREN DOSPUNTOS .)
 
 
 state 99
 
-    (25) condition -> condition TAB AND . TAB condition
+    (26) condition -> condition TAB AND . TAB condition
 
     TAB             shift and go to state 125
 
 
 state 100
 
-    (26) condition -> condition TAB OR . TAB condition
+    (27) condition -> condition TAB OR . TAB condition
 
     TAB             shift and go to state 126
 
 
 state 101
 
-    (21) condition -> expression DIGUAL expression .
+    (22) condition -> expression DIGUAL expression .
     (15) expression -> expression . PLUS expression
     (16) expression -> expression . MINUS expression
     (17) expression -> expression . TIMES expression
@@ -2265,10 +2265,10 @@ state 101
     (19) expression -> expression . POTENCY expression
     (20) expression -> expression . DIVIDE_INT expression
 
-    RPAREN          reduce using rule 21 (condition -> expression DIGUAL expression .)
-    DOSPUNTOS       reduce using rule 21 (condition -> expression DIGUAL expression .)
-    TAB             reduce using rule 21 (condition -> expression DIGUAL expression .)
-    $end            reduce using rule 21 (condition -> expression DIGUAL expression .)
+    RPAREN          reduce using rule 22 (condition -> expression DIGUAL expression .)
+    DOSPUNTOS       reduce using rule 22 (condition -> expression DIGUAL expression .)
+    TAB             reduce using rule 22 (condition -> expression DIGUAL expression .)
+    $end            reduce using rule 22 (condition -> expression DIGUAL expression .)
     PLUS            shift and go to state 17
     MINUS           shift and go to state 18
     TIMES           shift and go to state 19
@@ -2279,7 +2279,7 @@ state 101
 
 state 102
 
-    (22) condition -> expression DIFERENTE expression .
+    (23) condition -> expression DIFERENTE expression .
     (15) expression -> expression . PLUS expression
     (16) expression -> expression . MINUS expression
     (17) expression -> expression . TIMES expression
@@ -2287,10 +2287,10 @@ state 102
     (19) expression -> expression . POTENCY expression
     (20) expression -> expression . DIVIDE_INT expression
 
-    RPAREN          reduce using rule 22 (condition -> expression DIFERENTE expression .)
-    DOSPUNTOS       reduce using rule 22 (condition -> expression DIFERENTE expression .)
-    TAB             reduce using rule 22 (condition -> expression DIFERENTE expression .)
-    $end            reduce using rule 22 (condition -> expression DIFERENTE expression .)
+    RPAREN          reduce using rule 23 (condition -> expression DIFERENTE expression .)
+    DOSPUNTOS       reduce using rule 23 (condition -> expression DIFERENTE expression .)
+    TAB             reduce using rule 23 (condition -> expression DIFERENTE expression .)
+    $end            reduce using rule 23 (condition -> expression DIFERENTE expression .)
     PLUS            shift and go to state 17
     MINUS           shift and go to state 18
     TIMES           shift and go to state 19
@@ -2301,7 +2301,7 @@ state 102
 
 state 103
 
-    (23) condition -> expression MAYORQUE expression .
+    (24) condition -> expression MAYORQUE expression .
     (15) expression -> expression . PLUS expression
     (16) expression -> expression . MINUS expression
     (17) expression -> expression . TIMES expression
@@ -2309,10 +2309,10 @@ state 103
     (19) expression -> expression . POTENCY expression
     (20) expression -> expression . DIVIDE_INT expression
 
-    RPAREN          reduce using rule 23 (condition -> expression MAYORQUE expression .)
-    DOSPUNTOS       reduce using rule 23 (condition -> expression MAYORQUE expression .)
-    TAB             reduce using rule 23 (condition -> expression MAYORQUE expression .)
-    $end            reduce using rule 23 (condition -> expression MAYORQUE expression .)
+    RPAREN          reduce using rule 24 (condition -> expression MAYORQUE expression .)
+    DOSPUNTOS       reduce using rule 24 (condition -> expression MAYORQUE expression .)
+    TAB             reduce using rule 24 (condition -> expression MAYORQUE expression .)
+    $end            reduce using rule 24 (condition -> expression MAYORQUE expression .)
     PLUS            shift and go to state 17
     MINUS           shift and go to state 18
     TIMES           shift and go to state 19
@@ -2323,7 +2323,7 @@ state 103
 
 state 104
 
-    (24) condition -> expression MENORQUE expression .
+    (25) condition -> expression MENORQUE expression .
     (15) expression -> expression . PLUS expression
     (16) expression -> expression . MINUS expression
     (17) expression -> expression . TIMES expression
@@ -2331,10 +2331,10 @@ state 104
     (19) expression -> expression . POTENCY expression
     (20) expression -> expression . DIVIDE_INT expression
 
-    RPAREN          reduce using rule 24 (condition -> expression MENORQUE expression .)
-    DOSPUNTOS       reduce using rule 24 (condition -> expression MENORQUE expression .)
-    TAB             reduce using rule 24 (condition -> expression MENORQUE expression .)
-    $end            reduce using rule 24 (condition -> expression MENORQUE expression .)
+    RPAREN          reduce using rule 25 (condition -> expression MENORQUE expression .)
+    DOSPUNTOS       reduce using rule 25 (condition -> expression MENORQUE expression .)
+    TAB             reduce using rule 25 (condition -> expression MENORQUE expression .)
+    $end            reduce using rule 25 (condition -> expression MENORQUE expression .)
     PLUS            shift and go to state 17
     MINUS           shift and go to state 18
     TIMES           shift and go to state 19
@@ -2635,13 +2635,13 @@ state 124
 
 state 125
 
-    (25) condition -> condition TAB AND TAB . condition
-    (21) condition -> . expression DIGUAL expression
-    (22) condition -> . expression DIFERENTE expression
-    (23) condition -> . expression MAYORQUE expression
-    (24) condition -> . expression MENORQUE expression
-    (25) condition -> . condition TAB AND TAB condition
-    (26) condition -> . condition TAB OR TAB condition
+    (26) condition -> condition TAB AND TAB . condition
+    (22) condition -> . expression DIGUAL expression
+    (23) condition -> . expression DIFERENTE expression
+    (24) condition -> . expression MAYORQUE expression
+    (25) condition -> . expression MENORQUE expression
+    (26) condition -> . condition TAB AND TAB condition
+    (27) condition -> . condition TAB OR TAB condition
     (15) expression -> . expression PLUS expression
     (16) expression -> . expression MINUS expression
     (17) expression -> . expression TIMES expression
@@ -2672,13 +2672,13 @@ state 125
 
 state 126
 
-    (26) condition -> condition TAB OR TAB . condition
-    (21) condition -> . expression DIGUAL expression
-    (22) condition -> . expression DIFERENTE expression
-    (23) condition -> . expression MAYORQUE expression
-    (24) condition -> . expression MENORQUE expression
-    (25) condition -> . condition TAB AND TAB condition
-    (26) condition -> . condition TAB OR TAB condition
+    (27) condition -> condition TAB OR TAB . condition
+    (22) condition -> . expression DIGUAL expression
+    (23) condition -> . expression DIFERENTE expression
+    (24) condition -> . expression MAYORQUE expression
+    (25) condition -> . expression MENORQUE expression
+    (26) condition -> . condition TAB AND TAB condition
+    (27) condition -> . condition TAB OR TAB condition
     (15) expression -> . expression PLUS expression
     (16) expression -> . expression MINUS expression
     (17) expression -> . expression TIMES expression
@@ -2856,32 +2856,32 @@ state 147
 
 state 148
 
-    (25) condition -> condition TAB AND TAB condition .
-    (25) condition -> condition . TAB AND TAB condition
-    (26) condition -> condition . TAB OR TAB condition
+    (26) condition -> condition TAB AND TAB condition .
+    (26) condition -> condition . TAB AND TAB condition
+    (27) condition -> condition . TAB OR TAB condition
 
   ! shift/reduce conflict for TAB resolved as shift
-    RPAREN          reduce using rule 25 (condition -> condition TAB AND TAB condition .)
-    DOSPUNTOS       reduce using rule 25 (condition -> condition TAB AND TAB condition .)
-    $end            reduce using rule 25 (condition -> condition TAB AND TAB condition .)
+    RPAREN          reduce using rule 26 (condition -> condition TAB AND TAB condition .)
+    DOSPUNTOS       reduce using rule 26 (condition -> condition TAB AND TAB condition .)
+    $end            reduce using rule 26 (condition -> condition TAB AND TAB condition .)
     TAB             shift and go to state 71
 
-  ! TAB             [ reduce using rule 25 (condition -> condition TAB AND TAB condition .) ]
+  ! TAB             [ reduce using rule 26 (condition -> condition TAB AND TAB condition .) ]
 
 
 state 149
 
-    (26) condition -> condition TAB OR TAB condition .
-    (25) condition -> condition . TAB AND TAB condition
-    (26) condition -> condition . TAB OR TAB condition
+    (27) condition -> condition TAB OR TAB condition .
+    (26) condition -> condition . TAB AND TAB condition
+    (27) condition -> condition . TAB OR TAB condition
 
   ! shift/reduce conflict for TAB resolved as shift
-    RPAREN          reduce using rule 26 (condition -> condition TAB OR TAB condition .)
-    DOSPUNTOS       reduce using rule 26 (condition -> condition TAB OR TAB condition .)
-    $end            reduce using rule 26 (condition -> condition TAB OR TAB condition .)
+    RPAREN          reduce using rule 27 (condition -> condition TAB OR TAB condition .)
+    DOSPUNTOS       reduce using rule 27 (condition -> condition TAB OR TAB condition .)
+    $end            reduce using rule 27 (condition -> condition TAB OR TAB condition .)
     TAB             shift and go to state 71
 
-  ! TAB             [ reduce using rule 26 (condition -> condition TAB OR TAB condition .) ]
+  ! TAB             [ reduce using rule 27 (condition -> condition TAB OR TAB condition .) ]
 
 
 state 150
